@@ -18,18 +18,29 @@ namespace MastermindGame.Scripts
         {
             return Pieces.Count;
         }
+
+        public bool GetHasSomethingOn(int row)
+        {
+            BoardPiece bp = Pieces[row].GetComponent<BoardPiece>();
+            return bp.GetHasSomethingOn();
+        }
     }
 
     public class GameController : MonoBehaviour
     {
+        private GameObject boardHolder;
+        
         [SerializeField] [Range(2.0f, 4.0f)] private int numberToGuess = 4;
         [SerializeField] private GameObject boardPiece;
+        [SerializeField] private GameObject playPiece;
         [SerializeField] private List<Column> columns;
 
 
         // Start is called before the first frame update
         private void Start()
         {
+            boardHolder = new GameObject("Board Pieces are Here");
+            
             columns = new List<Column>();
             SpawnBoardPieces();
         }
@@ -41,8 +52,10 @@ namespace MastermindGame.Scripts
 
         private void SpawnBoardPieces()
         {
+            BoardPiece bp;
+            
             var x_start = -4.5f;
-            var z_start = 1.8f;
+            var z_start = 1.2f;
 
             var pieces = new List<GameObject>();
 
@@ -52,16 +65,26 @@ namespace MastermindGame.Scripts
                 {
                     var piece = Instantiate(boardPiece, new Vector3(x_start + x * 1.1f, 0, z_start - z * 1.5f),
                         Quaternion.identity);
+                    piece.transform.parent = boardHolder.transform;
                     pieces.Add(piece);
+                    
+                    bp = piece.GetComponent<BoardPiece>();
+                    bp.SetRowID(z);
+                    bp.SetColID(x);
                 }
-
+                
                 var newCol = new Column(pieces);
                 columns.Add(newCol);
+                
                 pieces.Clear();
             }
 
-            var c = columns[0];
-            Debug.Log(c.GetNumberOfPieces());
+
+        }
+
+        public void AddPlayPieceToBoardPiece()
+        {
+            Debug.Log("A piece will be added here");
         }
     }
 }

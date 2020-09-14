@@ -12,11 +12,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" />
       </list>
     </option>
   </component>
@@ -69,7 +71,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600100136377</updated>
-      <workItem from="1600100139999" duration="4928000" />
+      <workItem from="1600100139999" duration="5190000" />
+      <workItem from="1600113378672" duration="3084000" />
     </task>
     <servers />
   </component>
@@ -83,7 +86,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
