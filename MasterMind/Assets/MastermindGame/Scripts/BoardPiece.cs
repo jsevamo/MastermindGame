@@ -36,6 +36,11 @@ namespace MastermindGame.Scripts
         {
             return hasSomethingOn;
         }
+        
+        public void SetHasSomethingOn()
+        {
+             hasSomethingOn = true;
+        }
 
         public bool GetHasBeenClicked()
         {

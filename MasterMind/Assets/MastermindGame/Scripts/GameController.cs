@@ -39,6 +39,11 @@ namespace MastermindGame.Scripts
         [SerializeField] private GameObject boardPiece;
         [SerializeField] private GameObject playPiece;
         [SerializeField] private List<Column> columns;
+        [SerializeField] List<GameObject> colorPieces;
+        [SerializeField] public bool hasSomethingBeenClicked;
+        [SerializeField] private bool hasAColorBeenSelected;
+        public Color colorOfSelectedPiece;
+        private GameObject actualPlayPiece;
 
 
         // Start is called before the first frame update
@@ -48,11 +53,48 @@ namespace MastermindGame.Scripts
             
             columns = new List<Column>();
             SpawnBoardPieces();
+
+            colorPieces = new List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
+
+            hasSomethingBeenClicked = false;
+            hasAColorBeenSelected = false;
         }
 
         // Update is called once per frame
         private void Update()
         {
+            SpawnColorPieces();
+
+            if (actualPlayPiece)
+            {
+                actualPlayPiece.GetComponent<Renderer>().material.color = colorOfSelectedPiece;
+            }
+            
+        }
+
+        public void SetHasAColorBeenSelected()
+        {
+            hasAColorBeenSelected = true;
+        }
+
+        void SpawnColorPieces()
+        {
+            if (hasSomethingBeenClicked)
+            {
+                for (int i = 0; i < colorPieces.Count; i++)
+                {
+                    GameObject cp = colorPieces[i];
+                    cp.SetActive(true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < colorPieces.Count; i++)
+                {
+                    GameObject cp = colorPieces[i];
+                    cp.SetActive(false);
+                }
+            }
         }
 
         private void SpawnBoardPieces()
@@ -89,12 +131,29 @@ namespace MastermindGame.Scripts
 
         public void AddPlayPieceToBoardPiece(int colID, int rowID)
         {
-            Debug.Log("A piece will be added here: " + colID + " " + rowID);
+            hasSomethingBeenClicked = true;
 
             GameObject bp = columns[colID].GetAtRow(rowID);
 
-            var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
-                bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
+            BoardPiece _bp = bp.GetComponent<BoardPiece>();
+
+            if (_bp.GetHasSomethingOn() == false)
+            {
+                _bp.SetHasSomethingOn();
+
+                var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
+                    bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
+
+                actualPlayPiece = playPieceIns;
+            }
+            else
+            {
+                
+            }
+            
+            colorOfSelectedPiece = Color.black;
+            
+
 
         }
     }

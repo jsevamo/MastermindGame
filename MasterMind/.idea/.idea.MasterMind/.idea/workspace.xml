@@ -11,12 +11,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
       </list>
@@ -72,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1600100136377</updated>
       <workItem from="1600100139999" duration="5190000" />
-      <workItem from="1600113378672" duration="3866000" />
+      <workItem from="1600113378672" duration="6284000" />
     </task>
     <servers />
   </component>
