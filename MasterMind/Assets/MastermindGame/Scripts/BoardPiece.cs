@@ -10,6 +10,7 @@ namespace MastermindGame.Scripts
         [SerializeField] private bool hasBeenClicked;
         [SerializeField] private int colID;
         [SerializeField] private int rowID;
+        [SerializeField] public GameObject pieceOnTop;
 
 
         

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace MastermindGame.Scripts
@@ -43,7 +44,10 @@ namespace MastermindGame.Scripts
         [SerializeField] public bool hasSomethingBeenClicked;
         [SerializeField] private bool hasAColorBeenSelected;
         public Color colorOfSelectedPiece;
-        private GameObject actualPlayPiece;
+        [SerializeField] private GameObject actualPlayPiece;
+
+        [SerializeField]
+        int columnBeingPlayedOn;
 
 
         // Start is called before the first frame update
@@ -58,18 +62,49 @@ namespace MastermindGame.Scripts
 
             hasSomethingBeenClicked = false;
             hasAColorBeenSelected = false;
+
+            columnBeingPlayedOn = 0;
         }
 
         // Update is called once per frame
         private void Update()
         {
             SpawnColorPieces();
+            ChangeActualPieceColor();
+            NextColumnChecker();
 
+            
+            
+        }
+
+        void NextColumnChecker()
+        {
+            int a = 0;
+            for (int i = 0; i < numberToGuess; i++)
+            {
+                BoardPiece bp = columns[columnBeingPlayedOn].GetAtRow(i).GetComponent<BoardPiece>();
+
+                if (bp.GetHasSomethingOn() == true)
+                {
+                    a++;
+                }
+            }
+
+            if (a == numberToGuess)
+            {
+                Debug.Log("It's Filled");
+                columnBeingPlayedOn++;
+                a = 0;
+            }
+        }
+
+        void ChangeActualPieceColor()
+        {
             if (actualPlayPiece)
             {
                 actualPlayPiece.GetComponent<Renderer>().material.color = colorOfSelectedPiece;
             }
-            
+
         }
 
         public void SetHasAColorBeenSelected()
@@ -140,16 +175,19 @@ namespace MastermindGame.Scripts
             if (_bp.GetHasSomethingOn() == false)
             {
                 _bp.SetHasSomethingOn();
+                
 
                 var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
                     bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
 
+                _bp.pieceOnTop = playPieceIns;
                 actualPlayPiece = playPieceIns;
             }
             else
             {
-                
+                actualPlayPiece = _bp.pieceOnTop;
             }
+
             
             colorOfSelectedPiece = Color.black;
             
