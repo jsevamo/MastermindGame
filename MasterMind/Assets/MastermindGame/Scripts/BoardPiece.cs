@@ -29,7 +29,7 @@ namespace MastermindGame.Scripts
 
         private void OnMouseDown()
         {
-            GC.AddPlayPieceToBoardPiece();
+            GC.AddPlayPieceToBoardPiece(colID, rowID);
         }
 
         public bool GetHasSomethingOn()

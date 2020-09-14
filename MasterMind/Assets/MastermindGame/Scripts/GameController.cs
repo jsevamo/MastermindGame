@@ -24,6 +24,11 @@ namespace MastermindGame.Scripts
             BoardPiece bp = Pieces[row].GetComponent<BoardPiece>();
             return bp.GetHasSomethingOn();
         }
+
+        public GameObject GetAtRow(int i)
+        {
+            return Pieces[i];
+        }
     }
 
     public class GameController : MonoBehaviour
@@ -82,9 +87,15 @@ namespace MastermindGame.Scripts
 
         }
 
-        public void AddPlayPieceToBoardPiece()
+        public void AddPlayPieceToBoardPiece(int colID, int rowID)
         {
-            Debug.Log("A piece will be added here");
+            Debug.Log("A piece will be added here: " + colID + " " + rowID);
+
+            GameObject bp = columns[colID].GetAtRow(rowID);
+
+            var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
+                bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
+
         }
     }
 }
