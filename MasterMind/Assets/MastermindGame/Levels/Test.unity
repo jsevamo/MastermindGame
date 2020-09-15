@@ -833,6 +833,15 @@ MonoBehaviour:
   colorOfSelectedPiece: {r: 0, g: 0, b: 0, a: 0}
   actualPlayPiece: {fileID: 0}
   checkButton: {fileID: 1978610621}
+  playPieces: []
+  Col1: 
+  Col2: 
+  Col3: 
+  Col4: 
+  Col5: 
+  Col6: 
+  Col7: 
+  Col8: 
   columnBeingPlayedOn: 0
 --- !u!4 &1824369300
 Transform:
@@ -967,6 +976,7 @@ GameObject:
   - component: {fileID: 1978610624}
   - component: {fileID: 1978610623}
   - component: {fileID: 1978610622}
+  - component: {fileID: 1978610626}
   m_Layer: 0
   m_Name: Check
   m_TagString: Check
@@ -1049,6 +1059,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1978610626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978610621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d39811555262d47b964b310dfdd2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2111065739
 GameObject:
   m_ObjectHideFlags: 0

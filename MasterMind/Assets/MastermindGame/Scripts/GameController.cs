@@ -88,10 +88,18 @@ namespace MastermindGame.Scripts
         // Update is called once per frame
         private void Update()
         {
-            SpawnColorPieces();
-            ChangeActualPieceColor();
-            CheckIfColumnFull();
-            DisplayNewColumns();
+            if (columnBeingPlayedOn < 8)
+            {
+                SpawnColorPieces();
+                ChangeActualPieceColor();
+                CheckIfColumnFull();
+                DisplayNewColumns();
+            }
+            else
+            {
+                Debug.Log("you lost");
+            }
+            
 
             
 
@@ -129,52 +137,277 @@ namespace MastermindGame.Scripts
 
         public void MoveToNextColumn()
         {
-
-            bool canProgress = false;
-            
+            var canProgress = false;
             if (columnBeingPlayedOn == 0)
-            {
-
-                for (int i = 0; i < Col1.Count; i++)
-                {
+                for (var i = 0; i < Col1.Count; i++)
                     if (Col1[i] == 0)
                     {
-                        
                         checkButton.SetActive(false);
-                        
                         Debug.Log("You need to add colors to pieces");
-                        
-
-                        List<GameObject> bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-
-                        for (int x = 0; x < bps.Count; x++)
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
                         {
-                            BoardPiece bp = bps[x].GetComponent<BoardPiece>();
+                            var bp = bps[x].GetComponent<BoardPiece>();
                             bp.DeletePieceOnTop();
                             bp.SetHasSomethingOnFalse();
                         }
-                        
-                        
+
                         Col1.Clear();
-                        
                         return;
                     }
                     else
                     {
                         canProgress = true;
                     }
-                }
-            }
+            
+            
+            
+            if (columnBeingPlayedOn == 1)
+                for (var i = 0; i < Col2.Count; i++)
+                    if (Col2[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
 
+                        Col2.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
+            if (columnBeingPlayedOn == 2)
+                for (var i = 0; i < Col3.Count; i++)
+                    if (Col3[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
+
+                        Col3.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
+            if (columnBeingPlayedOn == 3)
+                for (var i = 0; i < Col4.Count; i++)
+                    if (Col4[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
+
+                        Col4.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
+            if (columnBeingPlayedOn == 4)
+                for (var i = 0; i < Col5.Count; i++)
+                    if (Col5[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
+
+                        Col5.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
+            if (columnBeingPlayedOn == 5)
+                for (var i = 0; i < Col6.Count; i++)
+                    if (Col6[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
+
+                        Col6.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
+            if (columnBeingPlayedOn == 6)
+                for (var i = 0; i < Col7.Count; i++)
+                    if (Col7[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
+
+                        Col7.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
+            if (columnBeingPlayedOn == 7)
+                for (var i = 0; i < Col8.Count; i++)
+                    if (Col8[i] == 0)
+                    {
+                        checkButton.SetActive(false);
+                        Debug.Log("You need to add colors to pieces");
+                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                        for (var x = 0; x < bps.Count; x++)
+                        {
+                            var bp = bps[x].GetComponent<BoardPiece>();
+                            bp.DeletePieceOnTop();
+                            bp.SetHasSomethingOnFalse();
+                        }
+
+                        Col8.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        canProgress = true;
+                    }
+            
             if (canProgress)
             {
-                Debug.Log("Go on Goo sir");
+                
+                Debug.Log("To the Next one");
+
                 columnBeingPlayedOn++;
+                
+                
                 checkButton.SetActive(false);
                 canProgress = false;
+                
+                
             }
 
             
+        }
+        
+        public void SaveOrderOfPlayPieces()
+        {
+            List<GameObject> boardPieceList = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+            if (columnBeingPlayedOn == 0)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col1.Add(_pieceOnTop.ParseColorToNumber());
+                    //Debug.Log(_pieceOnTop.GetColor());
+                }
+
+            if (columnBeingPlayedOn == 1)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col2.Add(_pieceOnTop.ParseColorToNumber());
+                }
+            
+            if (columnBeingPlayedOn == 2)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col3.Add(_pieceOnTop.ParseColorToNumber());
+                }
+            
+            if (columnBeingPlayedOn == 3)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col4.Add(_pieceOnTop.ParseColorToNumber());
+                }
+            
+            if (columnBeingPlayedOn == 4)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col5.Add(_pieceOnTop.ParseColorToNumber());
+                }
+            
+            if (columnBeingPlayedOn == 5)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col6.Add(_pieceOnTop.ParseColorToNumber());
+                }
+            
+            if (columnBeingPlayedOn == 6)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col7.Add(_pieceOnTop.ParseColorToNumber());
+                }
+            
+            if (columnBeingPlayedOn == 7)
+                foreach (var bp in boardPieceList)
+                {
+                    var _bp = bp.GetComponent<BoardPiece>();
+                    var pieceOnTop = _bp.pieceOnTop;
+                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                    Col8.Add(_pieceOnTop.ParseColorToNumber());
+                }
         }
 
         void ChangeActualPieceColor()
@@ -278,25 +511,6 @@ namespace MastermindGame.Scripts
 
         }
 
-        public void SaveOrderOfPlayPieces()
-        {
-            List<GameObject> boardPieceList = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-
-            if (columnBeingPlayedOn == 0)
-            {
-                foreach (var bp in boardPieceList)
-                {
-                    BoardPiece _bp = bp.GetComponent<BoardPiece>();
-                    GameObject pieceOnTop = _bp.pieceOnTop;
-                    PlayPiece _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                
-                    Col1.Add(_pieceOnTop.ParseColorToNumber());
-                    //Debug.Log(_pieceOnTop.GetColor());
-                
-                }
-            }
-
-            
-        }
+        
     }
 }
