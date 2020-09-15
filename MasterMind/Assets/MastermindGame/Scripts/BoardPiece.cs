@@ -13,6 +13,7 @@ namespace MastermindGame.Scripts
         [SerializeField] public GameObject pieceOnTop;
 
 
+
         
         //TODO: ADD THE PlayPiece Class here.
  
@@ -41,6 +42,11 @@ namespace MastermindGame.Scripts
         public void SetHasSomethingOn()
         {
              hasSomethingOn = true;
+        }
+        
+        public void SetHasSomethingOnFalse()
+        {
+            hasSomethingOn = false;
         }
 
         public bool GetHasBeenClicked()
@@ -71,6 +77,11 @@ namespace MastermindGame.Scripts
         public void SetHasBeenClicked(bool b)
         {
             hasBeenClicked = b;
+        }
+
+        public void DeletePieceOnTop()
+        {
+            Destroy(pieceOnTop);
         }
     }
 }
