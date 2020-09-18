@@ -332,82 +332,38 @@ namespace MastermindGame.Scripts
 
             
         }
+
+
+        void SaveOnColumn(List<GameObject> boardPieceList, int colN)
+        {
+            foreach (var bp in boardPieceList)
+            {
+                var _bp = bp.GetComponent<BoardPiece>();
+                var pieceOnTop = _bp.pieceOnTop;
+                var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
+                if (colN == 0) Col1.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 1) Col2.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 2) Col3.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 3) Col4.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 4) Col5.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 5) Col6.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 6) Col7.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 7) Col8.Add(_pieceOnTop.ParseColorToNumber());
+
+            }
+        }
         
         public void SaveOrderOfPlayPieces()
         {
-            List<GameObject> boardPieceList = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-            if (columnBeingPlayedOn == 0)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col1.Add(_pieceOnTop.ParseColorToNumber());
-                    //Debug.Log(_pieceOnTop.GetColor());
-                }
-
-            if (columnBeingPlayedOn == 1)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col2.Add(_pieceOnTop.ParseColorToNumber());
-                }
-            
-            if (columnBeingPlayedOn == 2)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col3.Add(_pieceOnTop.ParseColorToNumber());
-                }
-            
-            if (columnBeingPlayedOn == 3)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col4.Add(_pieceOnTop.ParseColorToNumber());
-                }
-            
-            if (columnBeingPlayedOn == 4)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col5.Add(_pieceOnTop.ParseColorToNumber());
-                }
-            
-            if (columnBeingPlayedOn == 5)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col6.Add(_pieceOnTop.ParseColorToNumber());
-                }
-            
-            if (columnBeingPlayedOn == 6)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col7.Add(_pieceOnTop.ParseColorToNumber());
-                }
-            
-            if (columnBeingPlayedOn == 7)
-                foreach (var bp in boardPieceList)
-                {
-                    var _bp = bp.GetComponent<BoardPiece>();
-                    var pieceOnTop = _bp.pieceOnTop;
-                    var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                    Col8.Add(_pieceOnTop.ParseColorToNumber());
-                }
+            var boardPieceList = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+            if (columnBeingPlayedOn == 0) SaveOnColumn(boardPieceList, 0);
+            if (columnBeingPlayedOn == 1) SaveOnColumn(boardPieceList, 1);
+            if (columnBeingPlayedOn == 2) SaveOnColumn(boardPieceList, 2);
+            if (columnBeingPlayedOn == 3) SaveOnColumn(boardPieceList, 3);
+            if (columnBeingPlayedOn == 4) SaveOnColumn(boardPieceList, 4);
+            if (columnBeingPlayedOn == 5) SaveOnColumn(boardPieceList, 5);
+            if (columnBeingPlayedOn == 6) SaveOnColumn(boardPieceList, 6);
+            if (columnBeingPlayedOn == 7) SaveOnColumn(boardPieceList, 7);
         }
 
         void ChangeActualPieceColor()
