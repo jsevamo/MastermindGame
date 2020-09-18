@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MastermindGame.Scripts
 {
@@ -41,7 +42,7 @@ namespace MastermindGame.Scripts
     {
         private GameObject boardHolder;
         
-        [SerializeField] [Range(2.0f, 4.0f)] private int numberToGuess = 4;
+        [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)] private int numberOfRowsToGuess = 4;
         [SerializeField] private GameObject boardPiece;
         [SerializeField] private GameObject playPiece;
         [SerializeField] private List<Column> columns;
@@ -53,14 +54,14 @@ namespace MastermindGame.Scripts
         [SerializeField] private GameObject checkButton;
         [SerializeField] private List<GameObject> playPieces;
         
-        [SerializeField] private List<int> Col1;
-        [SerializeField] private List<int> Col2;
-        [SerializeField] private List<int> Col3;
-        [SerializeField] private List<int> Col4;
-        [SerializeField] private List<int> Col5;
-        [SerializeField] private List<int> Col6;
-        [SerializeField] private List<int> Col7;
-        [SerializeField] private List<int> Col8;
+        [SerializeField] private List<int> Col1 = null;
+        [SerializeField] private List<int> Col2 = null;
+        [SerializeField] private List<int> Col3 = null;
+        [SerializeField] private List<int> Col4 = null;
+        [SerializeField] private List<int> Col5 = null;
+        [SerializeField] private List<int> Col6 = null;
+        [SerializeField] private List<int> Col7 = null;
+        [SerializeField] private List<int> Col8 = null;
 
         [SerializeField]
         int columnBeingPlayedOn;
@@ -116,23 +117,26 @@ namespace MastermindGame.Scripts
 
         void CheckIfColumnFull()
         {
-            int a = 0;
-            for (int i = 0; i < numberToGuess; i++)
+            int activeRow = 0;
+            for (int i = 0; i < numberOfRowsToGuess; i++)
             {
                 BoardPiece bp = columns[columnBeingPlayedOn].GetAtRow(i).GetComponent<BoardPiece>();
 
-                if (bp.GetHasSomethingOn() == true)
+                if (bp.GetHasSomethingOn())
                 {
-                    a++;
+                    activeRow++;
                 }
             }
 
-            if (a == numberToGuess)
+            if (activeRow == numberOfRowsToGuess)
             {
-                //columnBeingPlayedOn++;
                 checkButton.SetActive(true);
-                //a = 0;
             }
+        }
+
+        void ProgressColumn(int colN, bool canProgress)
+        {
+            
         }
 
         public void MoveToNextColumn()
@@ -351,7 +355,7 @@ namespace MastermindGame.Scripts
                 if (colN == 7) Col8.Add(_pieceOnTop.ParseColorToNumber());
 
             }
-        }
+        } 
         
         public void SaveOrderOfPlayPieces()
         {
@@ -411,7 +415,7 @@ namespace MastermindGame.Scripts
 
             for (var x = 0; x < 8; x++)
             {
-                for (var z = 0; z < numberToGuess; z++)
+                for (var z = 0; z < numberOfRowsToGuess; z++)
                 {
                     var piece = Instantiate(boardPiece, new Vector3(x_start + x * 1.1f, 0, z_start - z * 1.5f),
                         Quaternion.identity);
