@@ -161,11 +161,10 @@ namespace MastermindGame.Scripts
             if (columnBeingPlayedOn == 7) CheckIfCanMove(7);
         }
 
-        void CheckIfCanMove(int colN)
+        private void CheckIfCanMove(int colN)
         {
             var canProgress = false;
-            for (int i = 0; i < columnArray[colN].Count; i++)
-            {
+            for (var i = 0; i < columnArray[colN].Count; i++)
                 if (columnArray[colN][i] == 0)
                 {
                     checkButton.SetActive(false);
@@ -177,7 +176,7 @@ namespace MastermindGame.Scripts
                         bp.DeletePieceOnTop();
                         bp.SetHasSomethingOnFalse();
                     }
-                    
+
                     columnArray[colN].Clear();
                     return;
                 }
@@ -185,19 +184,13 @@ namespace MastermindGame.Scripts
                 {
                     canProgress = true;
                 }
-            }
+
             if (canProgress)
             {
-                
                 Debug.Log("To the Next one");
-
                 columnBeingPlayedOn++;
-                
-                
                 checkButton.SetActive(false);
                 canProgress = false;
-                
-                
             }
         }
         
