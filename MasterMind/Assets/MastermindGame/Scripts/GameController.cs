@@ -62,6 +62,7 @@ namespace MastermindGame.Scripts
         [SerializeField] private List<int> Col6 = null;
         [SerializeField] private List<int> Col7 = null;
         [SerializeField] private List<int> Col8 = null;
+        [SerializeField] List<int>[] columnArray = new List<int>[8];
 
         [SerializeField]
         int columnBeingPlayedOn;
@@ -70,6 +71,8 @@ namespace MastermindGame.Scripts
         // Start is called before the first frame update
         private void Start()
         {
+
+
             boardHolder = new GameObject("Board Pieces are Here");
             
             columns = new List<Column>();
@@ -83,6 +86,8 @@ namespace MastermindGame.Scripts
 
             columnBeingPlayedOn = 0;
             checkButton.SetActive(false);
+            
+            AddColumnsToColumnArray();
 
         }
 
@@ -100,10 +105,19 @@ namespace MastermindGame.Scripts
             {
                 Debug.Log("you lost");
             }
-            
 
-            
+        }
 
+        void AddColumnsToColumnArray()
+        {
+            columnArray[0] = Col1;
+            columnArray[1] = Col2;
+            columnArray[2] = Col3;
+            columnArray[3] = Col4;
+            columnArray[4] = Col5;
+            columnArray[5] = Col6;
+            columnArray[6] = Col7;
+            columnArray[7] = Col8;
         }
 
         void DisplayNewColumns()
@@ -133,193 +147,45 @@ namespace MastermindGame.Scripts
                 checkButton.SetActive(true);
             }
         }
-
-        void ProgressColumn(int colN, bool canProgress)
-        {
-            
-        }
+        
 
         public void MoveToNextColumn()
         {
+            if (columnBeingPlayedOn == 0) CheckIfCanMove(0); 
+            if (columnBeingPlayedOn == 1) CheckIfCanMove(1);
+            if (columnBeingPlayedOn == 2) CheckIfCanMove(2);
+            if (columnBeingPlayedOn == 3) CheckIfCanMove(3);
+            if (columnBeingPlayedOn == 4) CheckIfCanMove(4);
+            if (columnBeingPlayedOn == 5) CheckIfCanMove(5);
+            if (columnBeingPlayedOn == 6) CheckIfCanMove(6);
+            if (columnBeingPlayedOn == 7) CheckIfCanMove(7);
+        }
+
+        void CheckIfCanMove(int colN)
+        {
             var canProgress = false;
-            if (columnBeingPlayedOn == 0)
-                for (var i = 0; i < Col1.Count; i++)
-                    if (Col1[i] == 0)
+            for (int i = 0; i < columnArray[colN].Count; i++)
+            {
+                if (columnArray[colN][i] == 0)
+                {
+                    checkButton.SetActive(false);
+                    Debug.Log("You need to add colors to pieces");
+                    var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
+                    for (var x = 0; x < bps.Count; x++)
                     {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col1.Clear();
-                        return;
+                        var bp = bps[x].GetComponent<BoardPiece>();
+                        bp.DeletePieceOnTop();
+                        bp.SetHasSomethingOnFalse();
                     }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            
-            
-            if (columnBeingPlayedOn == 1)
-                for (var i = 0; i < Col2.Count; i++)
-                    if (Col2[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col2.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            if (columnBeingPlayedOn == 2)
-                for (var i = 0; i < Col3.Count; i++)
-                    if (Col3[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col3.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            if (columnBeingPlayedOn == 3)
-                for (var i = 0; i < Col4.Count; i++)
-                    if (Col4[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col4.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            if (columnBeingPlayedOn == 4)
-                for (var i = 0; i < Col5.Count; i++)
-                    if (Col5[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col5.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            if (columnBeingPlayedOn == 5)
-                for (var i = 0; i < Col6.Count; i++)
-                    if (Col6[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col6.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            if (columnBeingPlayedOn == 6)
-                for (var i = 0; i < Col7.Count; i++)
-                    if (Col7[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col7.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
-            if (columnBeingPlayedOn == 7)
-                for (var i = 0; i < Col8.Count; i++)
-                    if (Col8[i] == 0)
-                    {
-                        checkButton.SetActive(false);
-                        Debug.Log("You need to add colors to pieces");
-                        var bps = columns[columnBeingPlayedOn].GetListOfBoardPieces();
-                        for (var x = 0; x < bps.Count; x++)
-                        {
-                            var bp = bps[x].GetComponent<BoardPiece>();
-                            bp.DeletePieceOnTop();
-                            bp.SetHasSomethingOnFalse();
-                        }
-
-                        Col8.Clear();
-                        return;
-                    }
-                    else
-                    {
-                        canProgress = true;
-                    }
-            
+                    
+                    columnArray[colN].Clear();
+                    return;
+                }
+                else
+                {
+                    canProgress = true;
+                }
+            }
             if (canProgress)
             {
                 
@@ -333,10 +199,8 @@ namespace MastermindGame.Scripts
                 
                 
             }
-
-            
         }
-
+        
 
         void SaveOnColumn(List<GameObject> boardPieceList, int colN)
         {

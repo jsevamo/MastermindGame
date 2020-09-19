@@ -21,9 +21,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
-        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/PlayPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
       </list>
     </option>
@@ -79,7 +79,8 @@
       <updated>1600100136377</updated>
       <workItem from="1600100139999" duration="5190000" />
       <workItem from="1600113378672" duration="17511000" />
-      <workItem from="1600449870227" duration="3127000" />
+      <workItem from="1600449870227" duration="3227000" />
+      <workItem from="1600527565394" duration="2019000" />
     </task>
     <servers />
   </component>
