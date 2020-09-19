@@ -41,7 +41,7 @@ namespace MastermindGame.Scripts
     public class GameController : MonoBehaviour
     {
         private GameObject boardHolder;
-        
+        [SerializeField] private bool hasDuplicateColors = false;
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)] private int numberOfRowsToGuess = 4;
         [SerializeField] private GameObject boardPiece;
         [SerializeField] private GameObject playPiece;
@@ -63,8 +63,8 @@ namespace MastermindGame.Scripts
         [SerializeField] private List<int> Col7 = null;
         [SerializeField] private List<int> Col8 = null;
         [SerializeField] List<int>[] columnArray = new List<int>[8];
-
-        [SerializeField] private List<GameObject> winList;
+        
+        [SerializeField] private List<int> winList;
 
         [SerializeField]
         int columnBeingPlayedOn;
@@ -82,7 +82,7 @@ namespace MastermindGame.Scripts
 
             colorPieces = new List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
             playPiecesPutOnBoard = new List<GameObject>();
-            winList = new List<GameObject>();
+            winList = new List<int>();
 
             hasSomethingBeenClicked = false;
             hasAColorBeenSelected = false;
@@ -92,7 +92,7 @@ namespace MastermindGame.Scripts
             
             AddColumnsToColumnArray();
             CreateWinArrangement();
-
+            
         }
 
         // Update is called once per frame
@@ -107,22 +107,28 @@ namespace MastermindGame.Scripts
             }
             else
             {
-                Debug.Log("you lost");
+                Debug.Log("You Lost");
             }
 
         }
 
         void CreateWinArrangement()
         {
-            List<int> winInNumbersList = new List<int>();
-            for (int i = 0; i < numberOfRowsToGuess; i++)
-            {
-                winInNumbersList.Add(Random.Range(1,6));
-                Debug.Log(winInNumbersList[i]);
-            }
-            
-            ;
+            if (hasDuplicateColors)
+                for (var i = 0; i < numberOfRowsToGuess; i++)
+                    winList.Add(Random.Range(1, 6));
+            else
+                for (var i = 0; i < numberOfRowsToGuess; i++)
+                {
+                    var numberToAdd = Random.Range(1, 6);
+
+                    while (winList.Contains(numberToAdd)) numberToAdd = Random.Range(1, 6);
+
+                    winList.Add(numberToAdd);
+                }
         }
+
+ 
 
         void AddColumnsToColumnArray()
         {
