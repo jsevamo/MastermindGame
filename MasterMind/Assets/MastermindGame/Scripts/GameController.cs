@@ -52,7 +52,7 @@ namespace MastermindGame.Scripts
         public Color colorOfSelectedPiece;
         [SerializeField] private GameObject actualPlayPiece;
         [SerializeField] private GameObject checkButton;
-        [SerializeField] private List<GameObject> playPieces;
+        [FormerlySerializedAs("playPieces")] [SerializeField] private List<GameObject> playPiecesPutOnBoard;
         
         [SerializeField] private List<int> Col1 = null;
         [SerializeField] private List<int> Col2 = null;
@@ -63,6 +63,8 @@ namespace MastermindGame.Scripts
         [SerializeField] private List<int> Col7 = null;
         [SerializeField] private List<int> Col8 = null;
         [SerializeField] List<int>[] columnArray = new List<int>[8];
+
+        [SerializeField] private List<GameObject> winList;
 
         [SerializeField]
         int columnBeingPlayedOn;
@@ -79,7 +81,8 @@ namespace MastermindGame.Scripts
             SpawnBoardPieces();
 
             colorPieces = new List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
-            playPieces = new List<GameObject>();
+            playPiecesPutOnBoard = new List<GameObject>();
+            winList = new List<GameObject>();
 
             hasSomethingBeenClicked = false;
             hasAColorBeenSelected = false;
@@ -88,6 +91,7 @@ namespace MastermindGame.Scripts
             checkButton.SetActive(false);
             
             AddColumnsToColumnArray();
+            CreateWinArrangement();
 
         }
 
@@ -106,6 +110,18 @@ namespace MastermindGame.Scripts
                 Debug.Log("you lost");
             }
 
+        }
+
+        void CreateWinArrangement()
+        {
+            List<int> winInNumbersList = new List<int>();
+            for (int i = 0; i < numberOfRowsToGuess; i++)
+            {
+                winInNumbersList.Add(Random.Range(1,6));
+                Debug.Log(winInNumbersList[i]);
+            }
+            
+            ;
         }
 
         void AddColumnsToColumnArray()
@@ -311,7 +327,7 @@ namespace MastermindGame.Scripts
                 var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
                     bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
                 
-                playPieces.Add(playPieceIns);
+                playPiecesPutOnBoard.Add(playPieceIns);
 
                 _bp.pieceOnTop = playPieceIns;
                 actualPlayPiece = playPieceIns;
