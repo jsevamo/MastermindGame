@@ -45,6 +45,7 @@ namespace MastermindGame.Scripts
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)] private int numberOfRowsToGuess = 4;
         [SerializeField] private GameObject boardPiece;
         [SerializeField] private GameObject playPiece;
+        [SerializeField] private GameObject winningPiece;
         [SerializeField] private List<Column> columns;
         [SerializeField] List<GameObject> colorPieces;
         [SerializeField] public bool hasSomethingBeenClicked;
@@ -126,9 +127,23 @@ namespace MastermindGame.Scripts
 
                     winList.Add(numberToAdd);
                 }
+
+            DrawWinningArrangement();
         }
 
- 
+        void DrawWinningArrangement()
+        {
+            float x = 6.3f;
+            float y = 0;
+            float z = 1.2f;
+
+            for (int i = 0; i < numberOfRowsToGuess; i++)
+            {
+                Instantiate(winningPiece, new Vector3(x, y, z), Quaternion.identity);
+                z = z - 1.5f;
+            }
+            
+        }
 
         void AddColumnsToColumnArray()
         {

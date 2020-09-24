@@ -915,7 +915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5495fc37da26f5a4db711887187487bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberToGuess: 4
+  hasDuplicateColors: 0
+  numberOfRowsToGuess: 4
   boardPiece: {fileID: 2174652206641778170, guid: 778b4ac9fb9d6334887159da0b5f177c,
     type: 3}
   playPiece: {fileID: 6232401679972272518, guid: 1a3da4635fc0d114da893e422b9ebcbe,
@@ -927,7 +928,7 @@ MonoBehaviour:
   colorOfSelectedPiece: {r: 0, g: 0, b: 0, a: 0}
   actualPlayPiece: {fileID: 0}
   checkButton: {fileID: 1978610621}
-  playPieces: []
+  playPiecesPutOnBoard: []
   Col1: 
   Col2: 
   Col3: 
@@ -936,6 +937,7 @@ MonoBehaviour:
   Col6: 
   Col7: 
   Col8: 
+  winList: 
   columnBeingPlayedOn: 0
 --- !u!4 &1824369300
 Transform:
