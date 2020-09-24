@@ -70,11 +70,13 @@ namespace MastermindGame.Scripts
         [SerializeField]
         int columnBeingPlayedOn;
 
+        [SerializeField] private bool gameOver;
+
 
         // Start is called before the first frame update
         private void Start()
         {
-
+            gameOver = false;
 
             boardHolder = new GameObject("Board Pieces are Here");
             
@@ -99,17 +101,25 @@ namespace MastermindGame.Scripts
         // Update is called once per frame
         private void Update()
         {
-            if (columnBeingPlayedOn < 8)
+            if (!gameOver)
             {
-                SpawnColorPieces();
-                ChangeActualPieceColor();
-                CheckIfColumnFull();
-                DisplayNewColumns();
+                if (columnBeingPlayedOn < 8)
+                {
+                    SpawnColorPieces();
+                    ChangeActualPieceColor();
+                    CheckIfColumnFull();
+                    DisplayNewColumns();
+                }
+                else
+                {
+                    gameOver = true;
+                }
             }
             else
             {
-                Debug.Log("You Lost");
+                Debug.Log("Game Over");
             }
+            
 
         }
 
