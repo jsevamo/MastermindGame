@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace MastermindGame.Scripts
 {
-    [System.Serializable]
+    [Serializable]
     public class Column
     {
         [SerializeField] private List<GameObject> Pieces = new List<GameObject>();
@@ -23,7 +24,7 @@ namespace MastermindGame.Scripts
 
         public bool GetHasSomethingOn(int row)
         {
-            BoardPiece bp = Pieces[row].GetComponent<BoardPiece>();
+            var bp = Pieces[row].GetComponent<BoardPiece>();
             return bp.GetHasSomethingOn();
         }
 
@@ -41,36 +42,47 @@ namespace MastermindGame.Scripts
     public class GameController : MonoBehaviour
     {
         private GameObject boardHolder;
-        [SerializeField] private bool hasDuplicateColors = false;
-        [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)] private int numberOfRowsToGuess = 4;
+        [SerializeField] private bool hasDuplicateColors;
+
+        [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)]
+        private int numberOfRowsToGuess = 4;
+
         [SerializeField] private GameObject boardPiece;
         [SerializeField] private GameObject playPiece;
         [SerializeField] private GameObject winningPiece;
+        [SerializeField] private GameObject hitBlowBoardPiece;
+        [SerializeField] private GameObject hitBlowPiece;
         [SerializeField] private List<Column> columns;
-        [SerializeField] List<GameObject> colorPieces;
+        [SerializeField] private List<GameObject> colorPieces;
         [SerializeField] public bool hasSomethingBeenClicked;
         [SerializeField] private bool hasAColorBeenSelected;
         public Color colorOfSelectedPiece;
         [SerializeField] private GameObject actualPlayPiece;
         [SerializeField] private GameObject checkButton;
-        [FormerlySerializedAs("playPieces")] [SerializeField] private List<GameObject> playPiecesPutOnBoard;
-        
-        [SerializeField] private List<int> Col1 = null;
-        [SerializeField] private List<int> Col2 = null;
-        [SerializeField] private List<int> Col3 = null;
-        [SerializeField] private List<int> Col4 = null;
-        [SerializeField] private List<int> Col5 = null;
-        [SerializeField] private List<int> Col6 = null;
-        [SerializeField] private List<int> Col7 = null;
-        [SerializeField] private List<int> Col8 = null;
-        [SerializeField] List<int>[] columnArray = new List<int>[8];
-        
+
+        [FormerlySerializedAs("playPieces")] [SerializeField]
+        private List<GameObject> playPiecesPutOnBoard;
+
+        [SerializeField] private List<int> Col1;
+        [SerializeField] private List<int> Col2;
+        [SerializeField] private List<int> Col3;
+        [SerializeField] private List<int> Col4;
+        [SerializeField] private List<int> Col5;
+        [SerializeField] private List<int> Col6;
+        [SerializeField] private List<int> Col7;
+        [SerializeField] private List<int> Col8;
+        [SerializeField] private List<int>[] columnArray = new List<int>[8];
+
         [SerializeField] private List<int> winList;
 
-        [SerializeField]
-        int columnBeingPlayedOn;
+        [SerializeField] private int columnBeingPlayedOn;
 
         [SerializeField] private bool gameOver;
+
+        public int GetNumberOfRowsToGuess()
+        {
+            return numberOfRowsToGuess;
+        }
 
 
         // Start is called before the first frame update
@@ -79,7 +91,7 @@ namespace MastermindGame.Scripts
             gameOver = false;
 
             boardHolder = new GameObject("Board Pieces are Here");
-            
+
             columns = new List<Column>();
             SpawnBoardPieces();
 
@@ -92,10 +104,11 @@ namespace MastermindGame.Scripts
 
             columnBeingPlayedOn = 0;
             checkButton.SetActive(false);
-            
+
             AddColumnsToColumnArray();
             CreateWinArrangement();
-            
+
+            Instantiate(hitBlowBoardPiece, new Vector3(0, 0, 0), Quaternion.identity);
         }
 
         // Update is called once per frame
@@ -119,11 +132,9 @@ namespace MastermindGame.Scripts
             {
                 Debug.Log("Game Over");
             }
-            
-
         }
 
-        void CreateWinArrangement()
+        private void CreateWinArrangement()
         {
             if (hasDuplicateColors)
                 for (var i = 0; i < numberOfRowsToGuess; i++)
@@ -141,7 +152,7 @@ namespace MastermindGame.Scripts
             DrawWinningArrangement();
         }
 
-        void DrawWinningArrangement()
+        private void DrawWinningArrangement()
         {
             var solutionList = new List<GameObject>();
             var x = 6.3f;
@@ -160,10 +171,9 @@ namespace MastermindGame.Scripts
                 var number = winList[i];
                 piece.ParseNumberToColor(number);
             }
-            
         }
 
-        void AddColumnsToColumnArray()
+        private void AddColumnsToColumnArray()
         {
             columnArray[0] = Col1;
             columnArray[1] = Col2;
@@ -175,38 +185,32 @@ namespace MastermindGame.Scripts
             columnArray[7] = Col8;
         }
 
-        void DisplayNewColumns()
+        private void DisplayNewColumns()
         {
-            for (int i = 0; i < columns[columnBeingPlayedOn].GetListOfBoardPieces().Count; i++)
+            for (var i = 0; i < columns[columnBeingPlayedOn].GetListOfBoardPieces().Count; i++)
             {
-                GameObject boardPiece = columns[columnBeingPlayedOn].GetAtRow(i);
+                var boardPiece = columns[columnBeingPlayedOn].GetAtRow(i);
                 boardPiece.SetActive(true);
             }
         }
 
-        void CheckIfColumnFull()
+        private void CheckIfColumnFull()
         {
-            int activeRow = 0;
-            for (int i = 0; i < numberOfRowsToGuess; i++)
+            var activeRow = 0;
+            for (var i = 0; i < numberOfRowsToGuess; i++)
             {
-                BoardPiece bp = columns[columnBeingPlayedOn].GetAtRow(i).GetComponent<BoardPiece>();
+                var bp = columns[columnBeingPlayedOn].GetAtRow(i).GetComponent<BoardPiece>();
 
-                if (bp.GetHasSomethingOn())
-                {
-                    activeRow++;
-                }
+                if (bp.GetHasSomethingOn()) activeRow++;
             }
 
-            if (activeRow == numberOfRowsToGuess)
-            {
-                checkButton.SetActive(true);
-            }
+            if (activeRow == numberOfRowsToGuess) checkButton.SetActive(true);
         }
-        
+
 
         public void MoveToNextColumn()
         {
-            if (columnBeingPlayedOn == 0) CheckIfCanMove(0); 
+            if (columnBeingPlayedOn == 0) CheckIfCanMove(0);
             if (columnBeingPlayedOn == 1) CheckIfCanMove(1);
             if (columnBeingPlayedOn == 2) CheckIfCanMove(2);
             if (columnBeingPlayedOn == 3) CheckIfCanMove(3);
@@ -248,9 +252,9 @@ namespace MastermindGame.Scripts
                 canProgress = false;
             }
         }
-        
 
-        void SaveOnColumn(List<GameObject> boardPieceList, int colN)
+
+        private void SaveOnColumn(List<GameObject> boardPieceList, int colN)
         {
             foreach (var bp in boardPieceList)
             {
@@ -265,10 +269,9 @@ namespace MastermindGame.Scripts
                 if (colN == 5) Col6.Add(_pieceOnTop.ParseColorToNumber());
                 if (colN == 6) Col7.Add(_pieceOnTop.ParseColorToNumber());
                 if (colN == 7) Col8.Add(_pieceOnTop.ParseColorToNumber());
-
             }
-        } 
-        
+        }
+
         public void SaveOrderOfPlayPieces()
         {
             var boardPieceList = columns[columnBeingPlayedOn].GetListOfBoardPieces();
@@ -282,13 +285,9 @@ namespace MastermindGame.Scripts
             if (columnBeingPlayedOn == 7) SaveOnColumn(boardPieceList, 7);
         }
 
-        void ChangeActualPieceColor()
+        private void ChangeActualPieceColor()
         {
-            if (actualPlayPiece)
-            {
-                actualPlayPiece.GetComponent<Renderer>().material.color = colorOfSelectedPiece;
-            }
-
+            if (actualPlayPiece) actualPlayPiece.GetComponent<Renderer>().material.color = colorOfSelectedPiece;
         }
 
         public void SetHasAColorBeenSelected()
@@ -296,30 +295,26 @@ namespace MastermindGame.Scripts
             hasAColorBeenSelected = true;
         }
 
-        void SpawnColorPieces()
+        private void SpawnColorPieces()
         {
             if (hasSomethingBeenClicked)
-            {
-                for (int i = 0; i < colorPieces.Count; i++)
+                for (var i = 0; i < colorPieces.Count; i++)
                 {
-                    GameObject cp = colorPieces[i];
+                    var cp = colorPieces[i];
                     cp.SetActive(true);
                 }
-            }
             else
-            {
-                for (int i = 0; i < colorPieces.Count; i++)
+                for (var i = 0; i < colorPieces.Count; i++)
                 {
-                    GameObject cp = colorPieces[i];
+                    var cp = colorPieces[i];
                     cp.SetActive(false);
                 }
-            }
         }
 
         private void SpawnBoardPieces()
         {
             BoardPiece bp;
-            
+
             var x_start = -4.5f;
             var z_start = 1.2f;
 
@@ -333,39 +328,36 @@ namespace MastermindGame.Scripts
                         Quaternion.identity);
                     piece.transform.parent = boardHolder.transform;
                     pieces.Add(piece);
-                    
+
                     bp = piece.GetComponent<BoardPiece>();
                     bp.SetRowID(z);
                     bp.SetColID(x);
                     piece.SetActive(false);
-                    
                 }
-                
+
                 var newCol = new Column(pieces);
                 columns.Add(newCol);
-                
+
                 pieces.Clear();
             }
-
-
         }
 
         public void AddPlayPieceToBoardPiece(int colID, int rowID)
         {
             hasSomethingBeenClicked = true;
 
-            GameObject bp = columns[colID].GetAtRow(rowID);
+            var bp = columns[colID].GetAtRow(rowID);
 
-            BoardPiece _bp = bp.GetComponent<BoardPiece>();
+            var _bp = bp.GetComponent<BoardPiece>();
 
             if (_bp.GetHasSomethingOn() == false)
             {
                 _bp.SetHasSomethingOn();
-                
+
 
                 var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
                     bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
-                
+
                 playPiecesPutOnBoard.Add(playPieceIns);
 
                 _bp.pieceOnTop = playPieceIns;
@@ -377,12 +369,7 @@ namespace MastermindGame.Scripts
             }
 
             hasAColorBeenSelected = false;
-            colorOfSelectedPiece = new Color(0,0,0);
-            
-
-
+            colorOfSelectedPiece = new Color(0, 0, 0);
         }
-
-        
     }
 }

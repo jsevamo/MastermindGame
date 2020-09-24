@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.1728724, g: 0.21603622, b: 0.2979943, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -796,13 +796,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705984899}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.71806914, y: -0.1351724, z: 0.1405043, w: 0.66810465}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 23256301}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 85.928, y: -197.33899, z: -174.843}
 --- !u!1 &1754361687
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +921,12 @@ MonoBehaviour:
     type: 3}
   playPiece: {fileID: 6232401679972272518, guid: 1a3da4635fc0d114da893e422b9ebcbe,
     type: 3}
+  winningPiece: {fileID: 8668496658218767586, guid: c5f31205920c12e48a56d7db3c7cec89,
+    type: 3}
+  hitBlowBoardPiece: {fileID: 2729987543592539503, guid: fa18471d875c8e34ebd8c791ad9fad5e,
+    type: 3}
+  hitBlowPiece: {fileID: 5015080884864540772, guid: 90add694701140b4496cd1266c987ba8,
+    type: 3}
   columns: []
   colorPieces: []
   hasSomethingBeenClicked: 0
@@ -939,6 +945,7 @@ MonoBehaviour:
   Col8: 
   winList: 
   columnBeingPlayedOn: 0
+  gameOver: 0
 --- !u!4 &1824369300
 Transform:
   m_ObjectHideFlags: 0

@@ -12,8 +12,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/Slot.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/PlayPiece.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -25,6 +27,8 @@
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/Slot.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" />
       </list>
     </option>
   </component>
@@ -82,7 +86,10 @@
       <workItem from="1600449870227" duration="3227000" />
       <workItem from="1600527565394" duration="3964000" />
       <workItem from="1600537214045" duration="3020000" />
-      <workItem from="1600967344284" duration="2042000" />
+      <workItem from="1600967344284" duration="7608000" />
+      <workItem from="1600976510075" duration="1946000" />
+      <workItem from="1600978505603" duration="30000" />
+      <workItem from="1600978576120" duration="1076000" />
     </task>
     <servers />
   </component>

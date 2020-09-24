@@ -8,6 +8,10 @@ TagManager:
   - PlayPiece
   - ColorPiece
   - Check
+  - WinningPiece
+  - Hit&BlowBoard
+  - Hit&Blow
+  - Slot
   layers:
   - Default
   - TransparentFX

@@ -11,8 +11,10 @@
             <e p="BoardPiece.cs" t="Include" />
             <e p="ColorPiece.cs" t="Include" />
             <e p="GameController.cs" t="Include" />
+            <e p="HitnBlow.cs" t="Include" />
             <e p="NextColumn.cs" t="Include" />
             <e p="PlayPiece.cs" t="Include" />
+            <e p="Slot.cs" t="Include" />
           </e>
         </e>
       </e>
