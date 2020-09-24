@@ -133,14 +133,22 @@ namespace MastermindGame.Scripts
 
         void DrawWinningArrangement()
         {
-            float x = 6.3f;
+            var solutionList = new List<GameObject>();
+            var x = 6.3f;
             float y = 0;
-            float z = 1.2f;
-
-            for (int i = 0; i < numberOfRowsToGuess; i++)
+            var z = 1.2f;
+            for (var i = 0; i < numberOfRowsToGuess; i++)
             {
-                Instantiate(winningPiece, new Vector3(x, y, z), Quaternion.identity);
+                var solutionItem = Instantiate(winningPiece, new Vector3(x, y, z), Quaternion.identity);
                 z = z - 1.5f;
+                solutionList.Add(solutionItem);
+            }
+
+            for (var i = 0; i < winList.Count; i++)
+            {
+                var piece = solutionList[i].GetComponent<ColorPiece>();
+                var number = winList[i];
+                piece.ParseNumberToColor(number);
             }
             
         }

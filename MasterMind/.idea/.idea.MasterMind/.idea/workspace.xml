@@ -20,10 +20,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/PlayPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
       </list>
     </option>
@@ -82,7 +82,7 @@
       <workItem from="1600449870227" duration="3227000" />
       <workItem from="1600527565394" duration="3964000" />
       <workItem from="1600537214045" duration="3020000" />
-      <workItem from="1600967344284" duration="738000" />
+      <workItem from="1600967344284" duration="1774000" />
     </task>
     <servers />
   </component>
@@ -103,5 +103,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="684" y="184" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600968754309">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="684" y="184" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040/-2388.0.1061.701@0.0.1920.1040" timestamp="1600968754309" />
   </component>
 </project>
