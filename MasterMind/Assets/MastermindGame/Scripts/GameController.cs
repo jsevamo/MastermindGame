@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -158,7 +159,15 @@ namespace MastermindGame.Scripts
 
                     winList.Add(numberToAdd);
                 }
-
+            
+            
+            //Override Win List for tests
+            winList.Clear();
+            winList.Add(1);
+            winList.Add(2);
+            winList.Add(2);
+            winList.Add(3);
+            
             DrawWinningArrangement();
         }
 
@@ -225,20 +234,65 @@ namespace MastermindGame.Scripts
             var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
             var currentPlay = obj.GetComponent<HitnBlow>();
             var hits = 0;
+            var NoDuplicatesGuess = new List<int>();
+            NoDuplicatesGuess = currentGuess.Distinct().ToList();
             var blows = 0;
+            var blowsDuplicates = 0;
+            var isGuessRepeated = false;
+            
+            for (var q = 0; q < currentGuess.Count; q++)
+            for (var w = 0; w < currentGuess.Count; w++)
+                if (q != w)
+                    if (currentGuess[q] == currentGuess[w])
+                        isGuessRepeated = true;
+            
+            
+            if (isGuessRepeated)
+            {
+                for (var i = 0; i < currentGuess.Count; i++)
+                    if (winList.Contains(currentGuess[i]))
+                    {
+                        if (currentGuess[i] == winList[i])
+                        {
+                            hits++;
+                        }
+                        else
+                        {
+                            var count = 0;
+                            for (var j = 0; j < winList.Count; j++)
+                            for (var k = 0; k < currentGuess.Count; k++)
+                                if (currentGuess[j] == winList[k])
+                                    count++;
+                            if (count < 2) blows++;
+                            else
+                                for (var q = 0; q < NoDuplicatesGuess.Count; q++)
+                                for (var w = 0; w < winList.Count; w++)
+                                    if (NoDuplicatesGuess[q] == winList[w])
+                                        blowsDuplicates++;
+                        }
+                    }
+                
+                Debug.Log(NoDuplicatesGuess.Count);
 
-            for (var i = 0; i < currentGuess.Count; i++)
-                if (winList.Contains(currentGuess[i]))
+                if (blowsDuplicates > 0)
                 {
-                    if (currentGuess[i] == winList[i])
-                        hits++;
-                    else
-                        blows++;
+                    //blows = 1;
+                    //Debug.Log("this should print");
+                    
+                    //Check us WinList Contains any number in NoDuplicateList. Everytime it contains, ++. That's the blows
                 }
-
+            }
+            else
+            {
+                for (var i = 0; i < currentGuess.Count; i++)
+                    if (winList.Contains(currentGuess[i]))
+                    {
+                        if (currentGuess[i] == winList[i]) hits++;
+                        else blows++;
+                    }
+            }
 
             currentPlay.AddHitsAndBlows(hits, blows);
-
             if (hits == numberOfRowsToGuess) gameOver = true;
         }
 
