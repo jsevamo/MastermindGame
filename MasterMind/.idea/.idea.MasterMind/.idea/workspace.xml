@@ -26,8 +26,8 @@
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/Slot.cs" />
-        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
       </list>
     </option>
@@ -91,7 +91,7 @@
       <workItem from="1600978505603" duration="30000" />
       <workItem from="1600978576120" duration="1398000" />
       <workItem from="1600980001620" duration="90000" />
-      <workItem from="1601042721176" duration="3188000" />
+      <workItem from="1601042721176" duration="6338000" />
     </task>
     <servers />
   </component>

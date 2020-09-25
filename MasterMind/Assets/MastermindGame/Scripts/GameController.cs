@@ -1,4 +1,6 @@
-﻿using System;
+﻿//TODO: MAYBE COL1 --- COL8 COULD BE DELETED? CURRENTGUESSLIST SEEMS LIKE A GOOD REPLACEMENT.
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -66,6 +68,7 @@ namespace MastermindGame.Scripts
         [FormerlySerializedAs("playPieces")] [SerializeField]
         private List<GameObject> playPiecesPutOnBoard;
 
+        [SerializeField]private List<int> currentGuess;
         [SerializeField] private List<int> Col1;
         [SerializeField] private List<int> Col2;
         [SerializeField] private List<int> Col3;
@@ -103,6 +106,7 @@ namespace MastermindGame.Scripts
             colorPieces = new List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
             playPiecesPutOnBoard = new List<GameObject>();
             hitAndBlowPiecesList = new List<GameObject>();
+            currentGuess = new List<int>();
             winList = new List<int>();
 
             hasSomethingBeenClicked = false;
@@ -218,13 +222,24 @@ namespace MastermindGame.Scripts
 
         void CompareToSolution()
         {
-            if (canProgress)
-            {
-                GameObject obj = hitAndBlowPiecesList[columnBeingPlayedOn-1];
-                HitnBlow currentGuess = obj.GetComponent<HitnBlow>();
-                currentGuess.AddHitsAndBlows(1,1);
-            }
-            
+            var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
+            var currentPlay = obj.GetComponent<HitnBlow>();
+            var hits = 0;
+            var blows = 0;
+
+            for (var i = 0; i < currentGuess.Count; i++)
+                if (winList.Contains(currentGuess[i]))
+                {
+                    if (currentGuess[i] == winList[i])
+                        hits++;
+                    else
+                        blows++;
+                }
+
+
+            currentPlay.AddHitsAndBlows(hits, blows);
+
+            if (hits == numberOfRowsToGuess) gameOver = true;
         }
 
 
@@ -262,11 +277,12 @@ namespace MastermindGame.Scripts
                 else
                 {
                     canProgress = true;
+                    
                 }
 
             if (canProgress)
             {
-                Debug.Log("To the Next one");
+                //Debug.Log("To the Next one");
                 columnBeingPlayedOn++;
                 checkButton.SetActive(false);
                 CompareToSolution();
@@ -282,14 +298,53 @@ namespace MastermindGame.Scripts
                 var _bp = bp.GetComponent<BoardPiece>();
                 var pieceOnTop = _bp.pieceOnTop;
                 var _pieceOnTop = pieceOnTop.GetComponent<PlayPiece>();
-                if (colN == 0) Col1.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 1) Col2.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 2) Col3.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 3) Col4.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 4) Col5.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 5) Col6.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 6) Col7.Add(_pieceOnTop.ParseColorToNumber());
-                if (colN == 7) Col8.Add(_pieceOnTop.ParseColorToNumber());
+                if (colN == 0)
+                {
+                    Col1.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col1;
+                }
+
+                if (colN == 1)
+                {
+                    Col2.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col2;
+                }
+
+                if (colN == 2)
+                {
+                    Col3.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col3;
+                }
+
+                if (colN == 3)
+                {
+                    Col4.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col4;
+                }
+
+                if (colN == 4)
+                {
+                    Col5.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col5;
+                }
+
+                if (colN == 5)
+                {
+                    Col6.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col6;
+                }
+
+                if (colN == 6)
+                {
+                    Col7.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col7;
+                }
+
+                if (colN == 7)
+                {
+                    Col8.Add(_pieceOnTop.ParseColorToNumber());
+                    currentGuess = Col8;
+                }
             }
         }
 
