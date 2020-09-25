@@ -19,8 +19,7 @@ public class HitnBlow : MonoBehaviour
         slots = new List<GameObject>();
         GetListOfSlots();
         
-        AddHitsAndBlows(1,1);
-        
+        //AddHitsAndBlows(3,1);
     }
     
 

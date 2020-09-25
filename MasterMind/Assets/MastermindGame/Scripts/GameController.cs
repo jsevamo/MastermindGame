@@ -53,6 +53,7 @@ namespace MastermindGame.Scripts
         [SerializeField] private GameObject hitBlowBoardPiece;
         [SerializeField] private GameObject hitBlowPiece;
         [SerializeField] private List<Column> columns;
+        [SerializeField] private List<GameObject> hitAndBlowPiecesList;
         [SerializeField] private List<GameObject> colorPieces;
         [SerializeField] public bool hasSomethingBeenClicked;
         [SerializeField] private bool hasAColorBeenSelected;
@@ -78,6 +79,7 @@ namespace MastermindGame.Scripts
         [SerializeField] private int columnBeingPlayedOn;
 
         [SerializeField] private bool gameOver;
+        
 
         public int GetNumberOfRowsToGuess()
         {
@@ -97,6 +99,7 @@ namespace MastermindGame.Scripts
 
             colorPieces = new List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
             playPiecesPutOnBoard = new List<GameObject>();
+            hitAndBlowPiecesList = new List<GameObject>();
             winList = new List<int>();
 
             hasSomethingBeenClicked = false;
@@ -107,8 +110,9 @@ namespace MastermindGame.Scripts
 
             AddColumnsToColumnArray();
             CreateWinArrangement();
+            SpawnHitAndBlowPieces();
 
-            Instantiate(hitBlowBoardPiece, new Vector3(0, 0, 0), Quaternion.identity);
+            //Instantiate(hitBlowBoardPiece, new Vector3(0, 0, 0), Quaternion.identity);
         }
 
         // Update is called once per frame
@@ -293,6 +297,18 @@ namespace MastermindGame.Scripts
         public void SetHasAColorBeenSelected()
         {
             hasAColorBeenSelected = true;
+        }
+
+        void SpawnHitAndBlowPieces()
+        {
+            float xstart = -4.5f;
+            
+            for (int x = 0; x < 8; x++)
+            {
+                GameObject piece = Instantiate(hitBlowBoardPiece, new Vector3(xstart, 0.07f, 2), Quaternion.identity);
+                xstart = xstart + 1.1f;
+                hitAndBlowPiecesList.Add(piece);
+            }
         }
 
         private void SpawnColorPieces()
