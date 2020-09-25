@@ -42,6 +42,8 @@ namespace MastermindGame.Scripts
     public class GameController : MonoBehaviour
     {
         private GameObject boardHolder;
+        private GameObject HnBHolder;
+        private bool canProgress;
         [SerializeField] private bool hasDuplicateColors;
 
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)]
@@ -93,6 +95,7 @@ namespace MastermindGame.Scripts
             gameOver = false;
 
             boardHolder = new GameObject("Board Pieces are Here");
+            HnBHolder = new GameObject("Hit&Blow Pieces are Here");
 
             columns = new List<Column>();
             SpawnBoardPieces();
@@ -111,8 +114,7 @@ namespace MastermindGame.Scripts
             AddColumnsToColumnArray();
             CreateWinArrangement();
             SpawnHitAndBlowPieces();
-
-            //Instantiate(hitBlowBoardPiece, new Vector3(0, 0, 0), Quaternion.identity);
+            
         }
 
         // Update is called once per frame
@@ -208,7 +210,21 @@ namespace MastermindGame.Scripts
                 if (bp.GetHasSomethingOn()) activeRow++;
             }
 
-            if (activeRow == numberOfRowsToGuess) checkButton.SetActive(true);
+            if (activeRow == numberOfRowsToGuess)
+            {
+                checkButton.SetActive(true);
+            }
+        }
+
+        void CompareToSolution()
+        {
+            if (canProgress)
+            {
+                GameObject obj = hitAndBlowPiecesList[columnBeingPlayedOn-1];
+                HitnBlow currentGuess = obj.GetComponent<HitnBlow>();
+                currentGuess.AddHitsAndBlows(1,1);
+            }
+            
         }
 
 
@@ -226,7 +242,7 @@ namespace MastermindGame.Scripts
 
         private void CheckIfCanMove(int colN)
         {
-            var canProgress = false;
+            canProgress = false;
             for (var i = 0; i < columnArray[colN].Count; i++)
                 if (columnArray[colN][i] == 0)
                 {
@@ -253,6 +269,7 @@ namespace MastermindGame.Scripts
                 Debug.Log("To the Next one");
                 columnBeingPlayedOn++;
                 checkButton.SetActive(false);
+                CompareToSolution();
                 canProgress = false;
             }
         }
@@ -308,6 +325,7 @@ namespace MastermindGame.Scripts
                 GameObject piece = Instantiate(hitBlowBoardPiece, new Vector3(xstart, 0.07f, 2), Quaternion.identity);
                 xstart = xstart + 1.1f;
                 hitAndBlowPiecesList.Add(piece);
+                piece.transform.parent = HnBHolder.transform;
             }
         }
 

@@ -928,6 +928,7 @@ MonoBehaviour:
   hitBlowPiece: {fileID: 5015080884864540772, guid: 90add694701140b4496cd1266c987ba8,
     type: 3}
   columns: []
+  hitAndBlowPiecesList: []
   colorPieces: []
   hasSomethingBeenClicked: 0
   hasAColorBeenSelected: 0

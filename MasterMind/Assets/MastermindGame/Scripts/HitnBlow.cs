@@ -43,7 +43,7 @@ public class HitnBlow : MonoBehaviour
         }
     }
 
-    void AddHitsAndBlows(int hits, int blows)
+    public void AddHitsAndBlows(int hits, int blows)
     {
         if (hits + blows > GC.GetNumberOfRowsToGuess())
             throw new Exception("GodDamnit you can't have more hits and blows than guesses.");
