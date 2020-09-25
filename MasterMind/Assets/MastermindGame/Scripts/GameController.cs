@@ -107,7 +107,8 @@ namespace MastermindGame.Scripts
             columns = new List<Column>();
             SpawnBoardPieces();
 
-            colorPieces = new System.Collections.Generic.List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
+            colorPieces =
+                new System.Collections.Generic.List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
             playPiecesPutOnBoard = new System.Collections.Generic.List<GameObject>();
             hitAndBlowPiecesList = new List<GameObject>();
             currentGuess = new System.Collections.Generic.List<int>();
@@ -239,46 +240,29 @@ namespace MastermindGame.Scripts
             var hits = 0;
             var blows = 0;
 
-            System.Collections.Generic.List<int> usedSlots = new System.Collections.Generic.List<int>();
-            
-            
-            for (int i = 0; i < currentGuess.Count; i++)
-            {
-                
+            var usedSlots = new System.Collections.Generic.List<int>();
+
+
+            for (var i = 0; i < currentGuess.Count; i++)
                 if (currentGuess[i] == winList[i])
                 {
                     hits++;
                     usedSlots.Add(i);
                 }
-            }
-            
 
 
-            System.Collections.Generic.List<int> guessListAfterHits = new System.Collections.Generic.List<int>();
-            System.Collections.Generic.List<int> winListAfterHits = new System.Collections.Generic.List<int>();
-            
-            for (int i = 0; i < winList.Count; i++)
-            {
+            var guessListAfterHits = new System.Collections.Generic.List<int>();
+            var winListAfterHits = new System.Collections.Generic.List<int>();
+
+            for (var i = 0; i < winList.Count; i++)
                 if (!usedSlots.Contains(i))
-                {
                     winListAfterHits.Add(winList[i]);
-                }
-            }
 
 
-            for (int i = 0; i < currentGuess.Count; i++)
-            {
- 
+            for (var i = 0; i < currentGuess.Count; i++)
                 if (!usedSlots.Contains(i))
-                {
                     guessListAfterHits.Add(currentGuess[i]);
-                    
-                }
-                
-                
-  
-            }
-            
+
 
             var blackListNumber = new List<int>();
 
