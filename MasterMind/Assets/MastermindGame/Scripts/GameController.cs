@@ -1,10 +1,13 @@
 ﻿//TODO: MAYBE COL1 --- COL8 COULD BE DELETED? CURRENTGUESSLIST SEEMS LIKE A GOOD REPLACEMENT.
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Security.AccessControl;
+using Boo.Lang;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace MastermindGame.Scripts
@@ -12,10 +15,10 @@ namespace MastermindGame.Scripts
     [Serializable]
     public class Column
     {
-        [SerializeField] private List<GameObject> Pieces = new List<GameObject>();
+        [SerializeField] private System.Collections.Generic.List<GameObject> Pieces = new System.Collections.Generic.List<GameObject>();
+        
 
-
-        public Column(List<GameObject> piecesForColumn)
+        public Column(System.Collections.Generic.List<GameObject> piecesForColumn)
         {
             for (var i = 0; i < piecesForColumn.Count; i++) Pieces.Add(piecesForColumn[i]);
         }
@@ -36,7 +39,7 @@ namespace MastermindGame.Scripts
             return Pieces[i];
         }
 
-        public List<GameObject> GetListOfBoardPieces()
+        public System.Collections.Generic.List<GameObject> GetListOfBoardPieces()
         {
             return Pieces;
         }
@@ -59,7 +62,7 @@ namespace MastermindGame.Scripts
         [SerializeField] private GameObject hitBlowPiece;
         [SerializeField] private List<Column> columns;
         [SerializeField] private List<GameObject> hitAndBlowPiecesList;
-        [SerializeField] private List<GameObject> colorPieces;
+        [SerializeField] private System.Collections.Generic.List<GameObject> colorPieces;
         [SerializeField] public bool hasSomethingBeenClicked;
         [SerializeField] private bool hasAColorBeenSelected;
         public Color colorOfSelectedPiece;
@@ -67,20 +70,20 @@ namespace MastermindGame.Scripts
         [SerializeField] private GameObject checkButton;
 
         [FormerlySerializedAs("playPieces")] [SerializeField]
-        private List<GameObject> playPiecesPutOnBoard;
+        private System.Collections.Generic.List<GameObject> playPiecesPutOnBoard;
 
-        [SerializeField]private List<int> currentGuess;
-        [SerializeField] private List<int> Col1;
-        [SerializeField] private List<int> Col2;
-        [SerializeField] private List<int> Col3;
-        [SerializeField] private List<int> Col4;
-        [SerializeField] private List<int> Col5;
-        [SerializeField] private List<int> Col6;
-        [SerializeField] private List<int> Col7;
-        [SerializeField] private List<int> Col8;
-        [SerializeField] private List<int>[] columnArray = new List<int>[8];
+        [SerializeField]private System.Collections.Generic.List<int> currentGuess;
+        [SerializeField] private System.Collections.Generic.List<int> Col1;
+        [SerializeField] private System.Collections.Generic.List<int> Col2;
+        [SerializeField] private System.Collections.Generic.List<int> Col3;
+        [SerializeField] private System.Collections.Generic.List<int> Col4;
+        [SerializeField] private System.Collections.Generic.List<int> Col5;
+        [SerializeField] private System.Collections.Generic.List<int> Col6;
+        [SerializeField] private System.Collections.Generic.List<int> Col7;
+        [SerializeField] private System.Collections.Generic.List<int> Col8;
+        [SerializeField] private System.Collections.Generic.List<int>[] columnArray = new System.Collections.Generic.List<int>[8];
 
-        [SerializeField] private List<int> winList;
+        [SerializeField] private System.Collections.Generic.List<int> winList;
 
         [SerializeField] private int columnBeingPlayedOn;
 
@@ -104,11 +107,11 @@ namespace MastermindGame.Scripts
             columns = new List<Column>();
             SpawnBoardPieces();
 
-            colorPieces = new List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
-            playPiecesPutOnBoard = new List<GameObject>();
+            colorPieces = new System.Collections.Generic.List<GameObject>(GameObject.FindGameObjectsWithTag("ColorPiece"));
+            playPiecesPutOnBoard = new System.Collections.Generic.List<GameObject>();
             hitAndBlowPiecesList = new List<GameObject>();
-            currentGuess = new List<int>();
-            winList = new List<int>();
+            currentGuess = new System.Collections.Generic.List<int>();
+            winList = new System.Collections.Generic.List<int>();
 
             hasSomethingBeenClicked = false;
             hasAColorBeenSelected = false;
@@ -162,18 +165,18 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            winList.Clear();
-            winList.Add(1);
-            winList.Add(2);
-            winList.Add(2);
-            winList.Add(3);
+            // winList.Clear();
+            // winList.Add(5);
+            // winList.Add(5);
+            // winList.Add(3);
+            // winList.Add(1);
             
             DrawWinningArrangement();
         }
 
         private void DrawWinningArrangement()
         {
-            var solutionList = new List<GameObject>();
+            var solutionList = new System.Collections.Generic.List<GameObject>();
             var x = 6.3f;
             float y = 0;
             var z = 1.2f;
@@ -234,63 +237,69 @@ namespace MastermindGame.Scripts
             var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
             var currentPlay = obj.GetComponent<HitnBlow>();
             var hits = 0;
-            var NoDuplicatesGuess = new List<int>();
-            NoDuplicatesGuess = currentGuess.Distinct().ToList();
             var blows = 0;
-            var blowsDuplicates = 0;
-            var isGuessRepeated = false;
-            
-            for (var q = 0; q < currentGuess.Count; q++)
-            for (var w = 0; w < currentGuess.Count; w++)
-                if (q != w)
-                    if (currentGuess[q] == currentGuess[w])
-                        isGuessRepeated = true;
+
+            System.Collections.Generic.List<int> usedSlots = new System.Collections.Generic.List<int>();
             
             
-            if (isGuessRepeated)
+            for (int i = 0; i < currentGuess.Count; i++)
             {
-                for (var i = 0; i < currentGuess.Count; i++)
-                    if (winList.Contains(currentGuess[i]))
+                
+                if (currentGuess[i] == winList[i])
+                {
+                    hits++;
+                    usedSlots.Add(i);
+                }
+            }
+            
+
+
+            System.Collections.Generic.List<int> guessListAfterHits = new System.Collections.Generic.List<int>();
+            System.Collections.Generic.List<int> winListAfterHits = new System.Collections.Generic.List<int>();
+            
+            for (int i = 0; i < winList.Count; i++)
+            {
+                if (!usedSlots.Contains(i))
+                {
+                    winListAfterHits.Add(winList[i]);
+                }
+            }
+
+
+            for (int i = 0; i < currentGuess.Count; i++)
+            {
+ 
+                if (!usedSlots.Contains(i))
+                {
+                    guessListAfterHits.Add(currentGuess[i]);
+                    
+                }
+                
+                
+  
+            }
+            
+
+            var blackListNumber = new List<int>();
+
+            for (var j = 0; j < guessListAfterHits.Count; j++)
+            for (var k = 0; k < winListAfterHits.Count; k++)
+                if (guessListAfterHits[j] == winListAfterHits[k])
+                    if (!blackListNumber.Contains(guessListAfterHits[j]))
                     {
-                        if (currentGuess[i] == winList[i])
+                        var currentN = guessListAfterHits[j];
+                        var r = winListAfterHits.FindAll(s => s.Equals(currentN));
+                        if (r.Count > 1)
                         {
-                            hits++;
+                            blows++;
+                            winListAfterHits.RemoveAt(k);
                         }
                         else
                         {
-                            var count = 0;
-                            for (var j = 0; j < winList.Count; j++)
-                            for (var k = 0; k < currentGuess.Count; k++)
-                                if (currentGuess[j] == winList[k])
-                                    count++;
-                            if (count < 2) blows++;
-                            else
-                                for (var q = 0; q < NoDuplicatesGuess.Count; q++)
-                                for (var w = 0; w < winList.Count; w++)
-                                    if (NoDuplicatesGuess[q] == winList[w])
-                                        blowsDuplicates++;
+                            blows++;
+                            blackListNumber.Add(guessListAfterHits[j]);
                         }
                     }
-                
-                Debug.Log(NoDuplicatesGuess.Count);
-
-                if (blowsDuplicates > 0)
-                {
-                    //blows = 1;
-                    //Debug.Log("this should print");
-                    
-                    //Check us WinList Contains any number in NoDuplicateList. Everytime it contains, ++. That's the blows
-                }
-            }
-            else
-            {
-                for (var i = 0; i < currentGuess.Count; i++)
-                    if (winList.Contains(currentGuess[i]))
-                    {
-                        if (currentGuess[i] == winList[i]) hits++;
-                        else blows++;
-                    }
-            }
 
             currentPlay.AddHitsAndBlows(hits, blows);
             if (hits == numberOfRowsToGuess) gameOver = true;
@@ -345,7 +354,7 @@ namespace MastermindGame.Scripts
         }
 
 
-        private void SaveOnColumn(List<GameObject> boardPieceList, int colN)
+        private void SaveOnColumn(System.Collections.Generic.List<GameObject> boardPieceList, int colN)
         {
             foreach (var bp in boardPieceList)
             {
@@ -461,7 +470,7 @@ namespace MastermindGame.Scripts
             var x_start = -4.5f;
             var z_start = 1.2f;
 
-            var pieces = new List<GameObject>();
+            var pieces = new System.Collections.Generic.List<GameObject>();
 
             for (var x = 0; x < 8; x++)
             {

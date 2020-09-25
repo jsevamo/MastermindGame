@@ -26,8 +26,8 @@
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/BoardPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/Slot.cs" />
-        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
       </list>
     </option>
@@ -93,7 +93,7 @@
       <workItem from="1600980001620" duration="90000" />
       <workItem from="1601042721176" duration="9400000" />
       <workItem from="1601057515740" duration="928000" />
-      <workItem from="1601058916332" duration="1934000" />
+      <workItem from="1601058916332" duration="12832000" />
     </task>
     <servers />
   </component>
@@ -124,5 +124,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="684" y="184" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040/-2388.0.1061.701@0.0.1920.1040" timestamp="1600968754309" />
+    <state x="575" y="280" width="672" height="678" key="search.everywhere.popup" timestamp="1601064616288">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="575" y="280" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-2388.0.1061.701@0.0.1920.1040" timestamp="1601064616288" />
   </component>
 </project>
