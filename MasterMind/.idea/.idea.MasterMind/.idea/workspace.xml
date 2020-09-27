@@ -44,6 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TWShift.4" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -93,7 +94,10 @@
       <workItem from="1600980001620" duration="90000" />
       <workItem from="1601042721176" duration="9400000" />
       <workItem from="1601057515740" duration="928000" />
-      <workItem from="1601058916332" duration="12832000" />
+      <workItem from="1601058916332" duration="13124000" />
+      <workItem from="1601072937695" duration="120000" />
+      <workItem from="1601079265825" duration="918000" />
+      <workItem from="1601215969026" duration="1135000" />
     </task>
     <servers />
   </component>
@@ -120,6 +124,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="541" y="193" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1601042787330" />
+    <state x="502" y="203" key="SettingsEditor" timestamp="1601216652533">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="502" y="203" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601216652533" />
     <state x="684" y="184" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600968754309">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

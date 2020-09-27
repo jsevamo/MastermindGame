@@ -166,11 +166,11 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            // winList.Clear();
-            // winList.Add(5);
-            // winList.Add(5);
-            // winList.Add(3);
-            // winList.Add(1);
+            winList.Clear();
+            winList.Add(6);
+            winList.Add(5);
+            winList.Add(4);
+            winList.Add(5);
             
             DrawWinningArrangement();
         }
@@ -235,6 +235,8 @@ namespace MastermindGame.Scripts
 
         void CompareToSolution()
         {
+            
+            //todo: fix if solution has 3 or more repeated colors
             var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
             var currentPlay = obj.GetComponent<HitnBlow>();
             var hits = 0;
@@ -276,7 +278,9 @@ namespace MastermindGame.Scripts
                         if (r.Count > 1)
                         {
                             blows++;
-                            winListAfterHits.RemoveAt(k);
+                            //winListAfterHits.RemoveAt(k);
+                            //Todo: ultracheck if this is ok
+                            winListAfterHits.RemoveAll(item => winListAfterHits.Contains(winListAfterHits[k]));
                         }
                         else
                         {
