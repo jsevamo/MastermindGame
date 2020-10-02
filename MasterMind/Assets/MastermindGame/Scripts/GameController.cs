@@ -168,9 +168,9 @@ namespace MastermindGame.Scripts
             //Override Win List for tests
             winList.Clear();
             winList.Add(6);
-            winList.Add(5);
-            winList.Add(1);
             winList.Add(6);
+            winList.Add(4);
+            winList.Add(2);
             
             DrawWinningArrangement();
         }
@@ -233,9 +233,23 @@ namespace MastermindGame.Scripts
             }
         }
 
+
+
+        int CountHowManyOfNumber(System.Collections.Generic.List<int> list, int n)
+        {
+            int count = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == n)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
         void CompareToSolution()
         {
-            
             var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
             var currentPlay = obj.GetComponent<HitnBlow>();
             var hits = 0;
@@ -243,14 +257,12 @@ namespace MastermindGame.Scripts
 
             var usedSlots = new System.Collections.Generic.List<int>();
 
-
             for (var i = 0; i < currentGuess.Count; i++)
                 if (currentGuess[i] == winList[i])
                 {
                     hits++;
                     usedSlots.Add(i);
                 }
-
 
             var guessListAfterHits = new System.Collections.Generic.List<int>();
             var winListAfterHits = new System.Collections.Generic.List<int>();
@@ -265,44 +277,37 @@ namespace MastermindGame.Scripts
                     guessListAfterHits.Add(currentGuess[i]);
 
 
-            var blackListNumber = new List<int>();
-            
+            var flaggedN = new System.Collections.Generic.List<int>();
 
-            for (var j = 0; j < guessListAfterHits.Count; j++)
-            for (var k = 0; k < winListAfterHits.Count; k++)
-                if (guessListAfterHits[j] == winListAfterHits[k])
-                    if (!blackListNumber.Contains(guessListAfterHits[j]))
+            foreach (var n in guessListAfterHits)
+                if (winListAfterHits.Contains(n))
+                {
+                    var countGuess = CountHowManyOfNumber(guessListAfterHits, n);
+                    var countWin = CountHowManyOfNumber(winListAfterHits, n);
+
+
+                    if (countGuess == countWin)
                     {
-                        var currentN = guessListAfterHits[j];
-                        var r = winListAfterHits.FindAll(s => s.Equals(currentN));
-                        if (r.Count > 1)
-                        {
-                            blows++;
-                            //Todo: ultracheck if this is ok
-                            int numToRemove = winListAfterHits[k];
-
-                            var replaceList = new System.Collections.Generic.List<int>();
-                            replaceList.Clear();
-                            for (int x = 0; x < winListAfterHits.Count; x++)
+                        if (!flaggedN.Contains(n))
+                            for (var i = 0; i < countGuess; i++)
                             {
-                                if (winListAfterHits[x] != numToRemove)
-                                {
-                                    replaceList.Add(winListAfterHits[x]);
-                                }
+                                blows++;
+                                flaggedN.Add(n);
                             }
-                            winListAfterHits.Clear();
-                            winListAfterHits = replaceList;
-                            
-                            r.Clear();
-                            
-                        }
-                        else
+                    }
+                    else
+                    {
+                        if (!flaggedN.Contains(n))
                         {
                             blows++;
-                            blackListNumber.Add(guessListAfterHits[j]);
-                            Debug.Log("Is getting here too?");
+                            flaggedN.Add(n);
                         }
                     }
+                }
+
+
+            flaggedN.Clear();
+
 
             currentPlay.AddHitsAndBlows(hits, blows);
             if (hits == numberOfRowsToGuess) gameOver = true;
