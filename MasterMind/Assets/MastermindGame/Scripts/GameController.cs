@@ -169,8 +169,8 @@ namespace MastermindGame.Scripts
             winList.Clear();
             winList.Add(6);
             winList.Add(5);
-            winList.Add(4);
-            winList.Add(5);
+            winList.Add(1);
+            winList.Add(6);
             
             DrawWinningArrangement();
         }
@@ -236,7 +236,6 @@ namespace MastermindGame.Scripts
         void CompareToSolution()
         {
             
-            //todo: fix if solution has 3 or more repeated colors
             var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
             var currentPlay = obj.GetComponent<HitnBlow>();
             var hits = 0;
@@ -267,6 +266,7 @@ namespace MastermindGame.Scripts
 
 
             var blackListNumber = new List<int>();
+            
 
             for (var j = 0; j < guessListAfterHits.Count; j++)
             for (var k = 0; k < winListAfterHits.Count; k++)
@@ -278,14 +278,29 @@ namespace MastermindGame.Scripts
                         if (r.Count > 1)
                         {
                             blows++;
-                            //winListAfterHits.RemoveAt(k);
                             //Todo: ultracheck if this is ok
-                            winListAfterHits.RemoveAll(item => winListAfterHits.Contains(winListAfterHits[k]));
+                            int numToRemove = winListAfterHits[k];
+
+                            var replaceList = new System.Collections.Generic.List<int>();
+                            replaceList.Clear();
+                            for (int x = 0; x < winListAfterHits.Count; x++)
+                            {
+                                if (winListAfterHits[x] != numToRemove)
+                                {
+                                    replaceList.Add(winListAfterHits[x]);
+                                }
+                            }
+                            winListAfterHits.Clear();
+                            winListAfterHits = replaceList;
+                            
+                            r.Clear();
+                            
                         }
                         else
                         {
                             blows++;
                             blackListNumber.Add(guessListAfterHits[j]);
+                            Debug.Log("Is getting here too?");
                         }
                     }
 

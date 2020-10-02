@@ -12,12 +12,16 @@ public class HitnBlow : MonoBehaviour
     [SerializeField]  private int numberOfHits;
     [SerializeField]  private int numberOfBlows;
     
+    private GameObject HnBPieceHolder;
+    
     // Start is called before the first frame update
     void Start()
     {
         GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         slots = new List<GameObject>();
         GetListOfSlots();
+        
+        HnBPieceHolder = new GameObject("HitAndBlowBoard");
         
         //AddHitsAndBlows(3,1);
     }
@@ -38,6 +42,7 @@ public class HitnBlow : MonoBehaviour
 
             slot = slots[putItHere].GetComponent<Slot>();
             var ins_piece = Instantiate(piece, slot.transform.position, Quaternion.identity);
+            ins_piece.transform.parent = HnBPieceHolder.transform;
             ins_piece.GetComponent<Renderer>().material.color = col;
             slot.SetIsFull(true);
         }
