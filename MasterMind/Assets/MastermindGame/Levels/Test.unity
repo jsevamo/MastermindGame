@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 1082718707}
   - component: {fileID: 1082718706}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -915,6 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5495fc37da26f5a4db711887187487bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HnBHolder2: {fileID: 0}
   hasDuplicateColors: 1
   numberOfRowsToGuess: 4
   boardPiece: {fileID: 2174652206641778170, guid: 778b4ac9fb9d6334887159da0b5f177c,

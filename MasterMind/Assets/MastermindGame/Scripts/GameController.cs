@@ -55,6 +55,7 @@ namespace MastermindGame.Scripts
         
         private bool canProgress;
         [SerializeField] private bool hasDuplicateColors;
+        [SerializeField] private bool isAnswerVisible;
 
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)]
         private int numberOfRowsToGuess = 4;
@@ -72,6 +73,7 @@ namespace MastermindGame.Scripts
         public Color colorOfSelectedPiece;
         [SerializeField] private GameObject actualPlayPiece;
         [SerializeField] private GameObject checkButton;
+        [SerializeField] private GameObject blocker;
 
         [FormerlySerializedAs("playPieces")] [SerializeField]
         private System.Collections.Generic.List<GameObject> playPiecesPutOnBoard;
@@ -130,6 +132,8 @@ namespace MastermindGame.Scripts
             AddColumnsToColumnArray();
             CreateWinArrangement();
             SpawnHitAndBlowPieces();
+            MoveBlocker();
+            
             
         }
 
@@ -148,11 +152,27 @@ namespace MastermindGame.Scripts
                 else
                 {
                     gameOver = true;
+                    isAnswerVisible = true;
+                    MoveBlocker();
                 }
             }
             else
             {
                 Debug.Log("Game Over");
+                isAnswerVisible = true;
+                MoveBlocker();
+            }
+        }
+
+        void MoveBlocker()
+        {
+            if (!isAnswerVisible)
+            {
+                blocker.transform.position = new Vector3(6.33f,0.5f,-0.86f);
+            }
+            else
+            {
+                blocker.transform.position = new Vector3(6.33f,-0.4f,-0.86f);
             }
         }
 
