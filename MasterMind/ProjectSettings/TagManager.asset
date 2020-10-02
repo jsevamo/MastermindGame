@@ -12,6 +12,7 @@ TagManager:
   - Hit&BlowBoard
   - Hit&Blow
   - Slot
+  - Blocker
   layers:
   - Default
   - TransparentFX
