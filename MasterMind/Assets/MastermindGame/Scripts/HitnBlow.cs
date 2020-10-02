@@ -22,7 +22,8 @@ public class HitnBlow : MonoBehaviour
         GetListOfSlots();
         
         HnBPieceHolder = new GameObject("HitAndBlowBoard");
-        
+        HnBPieceHolder.transform.parent = GC.HnBHolder2.transform;
+
         //AddHitsAndBlows(3,1);
     }
     

@@ -49,6 +49,10 @@ namespace MastermindGame.Scripts
     {
         private GameObject boardHolder;
         private GameObject HnBHolder;
+        private GameObject playPieceHolder;
+        private GameObject winPieceHolder;
+        public GameObject HnBHolder2;
+        
         private bool canProgress;
         [SerializeField] private bool hasDuplicateColors;
 
@@ -102,7 +106,10 @@ namespace MastermindGame.Scripts
             gameOver = false;
 
             boardHolder = new GameObject("Board Pieces are Here");
-            HnBHolder = new GameObject("Hit&Blow Pieces are Here");
+            HnBHolder = new GameObject("Hit&Blow Boards are Here");
+            playPieceHolder = new GameObject("Play Pieces are here");
+            winPieceHolder = new GameObject("Win Pieces are here");
+            HnBHolder2 = new GameObject("Hit&Blow Pieces are Here");
 
             columns = new List<Column>();
             SpawnBoardPieces();
@@ -166,11 +173,11 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            winList.Clear();
-            winList.Add(6);
-            winList.Add(6);
-            winList.Add(4);
-            winList.Add(2);
+            //winList.Clear();
+            //winList.Add(5);
+            //winList.Add(2);
+            //winList.Add(2);
+            //winList.Add(6);
             
             DrawWinningArrangement();
         }
@@ -184,6 +191,7 @@ namespace MastermindGame.Scripts
             for (var i = 0; i < numberOfRowsToGuess; i++)
             {
                 var solutionItem = Instantiate(winningPiece, new Vector3(x, y, z), Quaternion.identity);
+                solutionItem.transform.parent = winPieceHolder.transform;
                 z = z - 1.5f;
                 solutionList.Add(solutionItem);
             }
@@ -517,6 +525,7 @@ namespace MastermindGame.Scripts
 
                 var playPieceIns = Instantiate(playPiece, new Vector3(bp.transform.position.x,
                     bp.transform.position.y, bp.transform.position.z), Quaternion.identity);
+                playPieceIns.transform.parent = playPieceHolder.transform;
 
                 playPiecesPutOnBoard.Add(playPieceIns);
 
