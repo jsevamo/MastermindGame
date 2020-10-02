@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class HitnBlow : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> slots;
-    [SerializeField] private GameObject piece;
+    [SerializeField] private List<GameObject> slots = null;
+    [SerializeField] private GameObject piece = null;
     private GameController GC;
     [SerializeField]  private int numberOfHits;
     [SerializeField]  private int numberOfBlows;

@@ -54,39 +54,39 @@ namespace MastermindGame.Scripts
         public GameObject HnBHolder2;
         
         private bool canProgress;
-        [SerializeField] private bool hasDuplicateColors;
+        [SerializeField] private bool hasDuplicateColors = false;
         [SerializeField] private bool isAnswerVisible;
 
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)]
         private int numberOfRowsToGuess = 4;
 
-        [SerializeField] private GameObject boardPiece;
-        [SerializeField] private GameObject playPiece;
-        [SerializeField] private GameObject winningPiece;
-        [SerializeField] private GameObject hitBlowBoardPiece;
-        [SerializeField] private GameObject hitBlowPiece;
-        [SerializeField] private List<Column> columns;
-        [SerializeField] private List<GameObject> hitAndBlowPiecesList;
-        [SerializeField] private System.Collections.Generic.List<GameObject> colorPieces;
+        [SerializeField] private GameObject boardPiece =null;
+        [SerializeField] private GameObject playPiece = null;
+        [SerializeField] private GameObject winningPiece = null;
+        [SerializeField] private GameObject hitBlowBoardPiece = null;
+        [SerializeField] private GameObject hitBlowPiece = null;
+        [SerializeField] private List<Column> columns = null;
+        [SerializeField] private List<GameObject> hitAndBlowPiecesList = null;
+        [SerializeField] private System.Collections.Generic.List<GameObject> colorPieces = null;
         [SerializeField] public bool hasSomethingBeenClicked;
-        [SerializeField] private bool hasAColorBeenSelected;
+        [SerializeField] private bool hasAColorBeenSelected = false;
         public Color colorOfSelectedPiece;
-        [SerializeField] private GameObject actualPlayPiece;
-        [SerializeField] private GameObject checkButton;
-        [SerializeField] private GameObject blocker;
-
+        [SerializeField] private GameObject actualPlayPiece = null;
+        [SerializeField] private GameObject checkButton = null;
+        [SerializeField] private GameObject blocker = null;
+ 
         [FormerlySerializedAs("playPieces")] [SerializeField]
         private System.Collections.Generic.List<GameObject> playPiecesPutOnBoard;
 
         [SerializeField]private System.Collections.Generic.List<int> currentGuess;
-        [SerializeField] private System.Collections.Generic.List<int> Col1;
-        [SerializeField] private System.Collections.Generic.List<int> Col2;
-        [SerializeField] private System.Collections.Generic.List<int> Col3;
-        [SerializeField] private System.Collections.Generic.List<int> Col4;
-        [SerializeField] private System.Collections.Generic.List<int> Col5;
-        [SerializeField] private System.Collections.Generic.List<int> Col6;
-        [SerializeField] private System.Collections.Generic.List<int> Col7;
-        [SerializeField] private System.Collections.Generic.List<int> Col8;
+        [SerializeField] private System.Collections.Generic.List<int> Col1 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col2 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col3 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col4 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col5 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col6 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col7 = null;
+        [SerializeField] private System.Collections.Generic.List<int> Col8 = null;
         [SerializeField] private System.Collections.Generic.List<int>[] columnArray = new System.Collections.Generic.List<int>[8];
 
         [SerializeField] private System.Collections.Generic.List<int> winList;
@@ -100,6 +100,7 @@ namespace MastermindGame.Scripts
         {
             return numberOfRowsToGuess;
         }
+        
 
 
         // Start is called before the first frame update
