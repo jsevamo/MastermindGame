@@ -11,6 +11,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/AddHitBlowBTN.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/ColorPiece.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -28,6 +29,7 @@
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/Slot.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/NextColumn.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/HitnBlow.cs" />
+        <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/AddHitBlowBTN.cs" />
         <option value="$PROJECT_DIR$/Assets/MastermindGame/Scripts/GameController.cs" />
       </list>
     </option>
@@ -99,7 +101,9 @@
       <workItem from="1601079265825" duration="918000" />
       <workItem from="1601215969026" duration="1536000" />
       <workItem from="1601299353787" duration="118000" />
-      <workItem from="1601648553282" duration="17084000" />
+      <workItem from="1601648553282" duration="18032000" />
+      <workItem from="1601672223195" duration="229000" />
+      <workItem from="1602020819612" duration="3809000" />
     </task>
     <servers />
   </component>

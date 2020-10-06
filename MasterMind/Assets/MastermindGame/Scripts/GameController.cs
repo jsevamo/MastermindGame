@@ -7,6 +7,7 @@ using System.Security.AccessControl;
 using Boo.Lang;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -55,7 +56,7 @@ namespace MastermindGame.Scripts
         
         private bool canProgress;
         [SerializeField] private bool hasDuplicateColors = false;
-        [SerializeField] private bool isAnswerVisible;
+        [SerializeField] public bool isAnswerVisible;
 
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)]
         private int numberOfRowsToGuess = 4;
@@ -95,6 +96,14 @@ namespace MastermindGame.Scripts
 
         [SerializeField] private bool gameOver;
         
+        
+
+        [SerializeField] private Button AddHitsBTN;
+        [SerializeField] public InputField hitsInput;
+        [SerializeField] public InputField blowsInput;
+        [SerializeField] public bool playingManually = false;
+        [SerializeField] public int manualHits = 0;
+        [SerializeField] public int manualBlows = 0;
 
         public int GetNumberOfRowsToGuess()
         {
@@ -148,7 +157,7 @@ namespace MastermindGame.Scripts
                     SpawnColorPieces();
                     ChangeActualPieceColor();
                     CheckIfColumnFull();
-                    DisplayNewColumns();
+                    DisplayPiecesOfColumns();
                 }
                 else
                 {
@@ -195,10 +204,10 @@ namespace MastermindGame.Scripts
             
             //Override Win List for tests
             //winList.Clear();
+            //winList.Add(2);
+            //winList.Add(1);
             //winList.Add(5);
             //winList.Add(2);
-            //winList.Add(2);
-            //winList.Add(6);
             
             DrawWinningArrangement();
         }
@@ -237,7 +246,7 @@ namespace MastermindGame.Scripts
             columnArray[7] = Col8;
         }
 
-        private void DisplayNewColumns()
+        private void DisplayPiecesOfColumns()
         {
             for (var i = 0; i < columns[columnBeingPlayedOn].GetListOfBoardPieces().Count; i++)
             {
@@ -277,10 +286,14 @@ namespace MastermindGame.Scripts
             return count;
         }
         
-        void CompareToSolution()
+        public void CompareToSolution()
         {
             var obj = hitAndBlowPiecesList[columnBeingPlayedOn - 1];
             var currentPlay = obj.GetComponent<HitnBlow>();
+            
+            if (!playingManually)
+            { 
+                
             var hits = 0;
             var blows = 0;
 
@@ -340,6 +353,16 @@ namespace MastermindGame.Scripts
 
             currentPlay.AddHitsAndBlows(hits, blows);
             if (hits == numberOfRowsToGuess) gameOver = true;
+            
+            }
+            else
+            {
+                currentPlay.AddHitsAndBlows(manualHits, manualBlows);
+                if (manualHits == numberOfRowsToGuess) gameOver = true;
+                manualBlows = 0;
+                manualHits = 0;
+            }
+            
         }
 
 

@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="MastermindGame" t="Include">
           <e p="Scripts" t="Include">
+            <e p="AddHitBlowBTN.cs" t="Include" />
             <e p="BoardPiece.cs" t="Include" />
             <e p="ColorPiece.cs" t="Include" />
             <e p="GameController.cs" t="Include" />
