@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MastermindGame.Scripts
@@ -56,7 +57,41 @@ namespace MastermindGame.Scripts
 
         void PrintSuggestedMove(int a, int b, int c, int d)
         {
-            Debug.Log("Suggested Move: " + "[" + a + "]"  + "[" + b + "]" + "[" + c + "]" + "[" + d + "]" );
+            Debug.Log("Suggested Move: " + "[" + ParseNumberToColor(a) + "]"  + "[" + ParseNumberToColor(b) + "]" 
+                      + "[" + ParseNumberToColor(c) + "]" + "[" + ParseNumberToColor(d) + "]" );
+        }
+
+        string ParseNumberToColor(int n)
+        {
+            if (n == 1)
+            {
+                return "Blue";
+            }
+            else if (n == 2)
+            {
+                return "Red";
+            }
+            else if (n == 3)
+            {
+                return "Green";
+            }
+            else if (n == 4)
+            {
+                return "Yellow";
+            }
+            else if (n == 5)
+            {
+                return "Pink";
+            }
+            else if (n == 6)
+            {
+                return "White";
+            }
+            else
+            {
+                throw new Exception("The parsing from numbers to colors is wrong. " +
+                                    "Somehow we inputted a number less than 1 or greater than 6");
+            }
         }
 
         void SuggestACombination()
