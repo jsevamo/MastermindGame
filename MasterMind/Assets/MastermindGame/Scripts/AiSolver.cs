@@ -19,6 +19,16 @@ namespace MastermindGame.Scripts
             CreateTheSetS();
             PrintHowManyGuessesLeft();
             SuggestACombination();
+            
+            
+            List<int> a = new List<int>();
+            a.Add(6);
+            a.Add(5);
+            a.Add(4);
+            a.Add(3);
+            
+            RemoveSolutionFromListS(a);
+            
         }
     
 
@@ -46,10 +56,11 @@ namespace MastermindGame.Scripts
 
         void PrintHowManyGuessesLeft()
         {
-            Debug.Log("There currently are " + ReturnGuessesLeft() + " possible combinations left to play.");
+            Debug.Log("After having performed some magic, I currently see " + ReturnGuessesLeft() + 
+                      " possible combinations that could win this game in this turn.");
             
-            Debug.Log("That means there is a certainty of " + Math.Round(((1f / ReturnGuessesLeft()) * 100f), 2) 
-                                                            + "% that you will win in this turn with what I suggest." );
+            Debug.Log("That means that I have a certainty of " + Math.Round(((1f / ReturnGuessesLeft()) * 100f), 2) 
+                                                            + "% that you will win now with what I suggest." );
         }
 
         int ReturnGuessesLeft()
@@ -82,9 +93,47 @@ namespace MastermindGame.Scripts
                                     "Somehow we inputted a number less than 1 or greater than 6");
         }
 
+        void RemoveSolutionFromListS(List<int> toRemove)
+        {
+            int counter = 0;
+            bool hasRemoved = false;
+            
+            for (int i = 0; i < S.Count; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (toRemove[j] == S[i][j])
+                    {
+                        counter++;
+                        if (counter == 4)
+                        {
+                            //Debug.Log("ok I found what to delete at S:" + i);
+                            S.RemoveAt(i);
+                            hasRemoved = true;
+                            counter = 0;
+                            return;
+                        }
+                        
+                    }
+
+                    if (j == 3) counter = 0;
+                }
+               
+            }
+
+            if (!hasRemoved)
+            {
+                throw new Exception("Nothing has been removed from S");
+            }
+        }
+
         void SuggestACombination()
         {
-            if (GC.columnBeingPlayedOn == 0) PrintSuggestedMove(1, 1, 2, 2);
+            if (GC.columnBeingPlayedOn == 0)
+            {
+                PrintSuggestedMove(1, 1, 2, 2);
+                Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
+            }
         }
     }
 }

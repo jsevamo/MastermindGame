@@ -29,7 +29,7 @@ namespace MastermindGame.Scripts
                 throw new Exception("Neither blows nor hits can be empty if you want to use this function.");
             }
             
-            Debug.Log(blows + " " + hits);
+            Debug.Log("Blows added: " + blows + " Hits added:  " + hits);
 
             GC.playingManually = true;
             int nblows = int.Parse(blows);

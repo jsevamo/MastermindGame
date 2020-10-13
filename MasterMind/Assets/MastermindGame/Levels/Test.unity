@@ -730,6 +730,49 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &589457272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 589457273}
+  - component: {fileID: 589457274}
+  m_Layer: 0
+  m_Name: Artificial Intelligence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &589457273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589457272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.3916187, y: -2.466308, z: 3.0513492}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &589457274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589457272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e54e9001d76747b13c1db118f3c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &699017621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HnBHolder2: {fileID: 0}
   hasDuplicateColors: 1
-  isAnswerVisible: 0
+  isAnswerVisible: 1
   numberOfRowsToGuess: 4
   boardPiece: {fileID: 2174652206641778170, guid: 778b4ac9fb9d6334887159da0b5f177c,
     type: 3}
