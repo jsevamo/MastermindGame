@@ -47,7 +47,9 @@ namespace MastermindGame.Scripts
         void PrintHowManyGuessesLeft()
         {
             Debug.Log("There currently are " + ReturnGuessesLeft() + " possible combinations left to play.");
-            Debug.Log("That means there is a certainty of " + (1 / ReturnGuessesLeft())*100 + "% that you will win in this turn with what I suggest." );
+            
+            Debug.Log("That means there is a certainty of " + Math.Round(((1f / ReturnGuessesLeft()) * 100f), 2) 
+                                                            + "% that you will win in this turn with what I suggest." );
         }
 
         int ReturnGuessesLeft()
@@ -64,42 +66,25 @@ namespace MastermindGame.Scripts
         string ParseNumberToColor(int n)
         {
             if (n == 1)
-            {
                 return "Blue";
-            }
-            else if (n == 2)
-            {
+            if (n == 2)
                 return "Red";
-            }
             else if (n == 3)
-            {
                 return "Green";
-            }
             else if (n == 4)
-            {
                 return "Yellow";
-            }
             else if (n == 5)
-            {
                 return "Pink";
-            }
             else if (n == 6)
-            {
                 return "White";
-            }
             else
-            {
                 throw new Exception("The parsing from numbers to colors is wrong. " +
                                     "Somehow we inputted a number less than 1 or greater than 6");
-            }
         }
 
         void SuggestACombination()
         {
-            if (GC.columnBeingPlayedOn == 0)
-            {
-                PrintSuggestedMove(1,1,2,2);
-            }
+            if (GC.columnBeingPlayedOn == 0) PrintSuggestedMove(1, 1, 2, 2);
         }
     }
 }
