@@ -92,7 +92,7 @@ namespace MastermindGame.Scripts
 
         [SerializeField] private System.Collections.Generic.List<int> winList;
 
-        [SerializeField] private int columnBeingPlayedOn;
+        [SerializeField] public int columnBeingPlayedOn;
 
         [SerializeField] private bool gameOver;
         
