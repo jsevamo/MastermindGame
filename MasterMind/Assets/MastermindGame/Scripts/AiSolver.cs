@@ -290,8 +290,8 @@ namespace MastermindGame.Scripts
                                                                    "suggested move: " );
                 
                 //Deleteeeee this
-                CheckIfSolutionStillInS(GC.winList);
-                PrintListFromS(S[solI]);
+                //CheckIfSolutionStillInS(GC.winList);
+                //PrintListFromS(S[solI]);
 
 
                 int index = Random.Range(0, S.Count);
@@ -424,7 +424,6 @@ namespace MastermindGame.Scripts
         {
             Debug.Log(tempS.Count);
             
-            //S.Clear();
 
             for (int i = 0; i < tempS.Count; i++)
             {

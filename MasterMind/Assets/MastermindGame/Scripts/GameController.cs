@@ -206,9 +206,9 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            winList.Clear();
-            winList.Add(2);
-            winList.Add(3);
+            // winList.Clear();
+            // winList.Add(2);
+            // winList.Add(3);
             // winList.Add(2);
             // winList.Add(5);
             
