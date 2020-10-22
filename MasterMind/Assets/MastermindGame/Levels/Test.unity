@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 589457274}
   m_Layer: 0
   m_Name: Artificial Intelligence
-  m_TagString: Untagged
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2090,7 +2090,7 @@ MonoBehaviour:
   HnBHolder2: {fileID: 0}
   hasDuplicateColors: 1
   isAnswerVisible: 1
-  numberOfRowsToGuess: 4
+  numberOfRowsToGuess: 2
   boardPiece: {fileID: 2174652206641778170, guid: 778b4ac9fb9d6334887159da0b5f177c,
     type: 3}
   playPiece: {fileID: 6232401679972272518, guid: 1a3da4635fc0d114da893e422b9ebcbe,
@@ -2127,6 +2127,8 @@ MonoBehaviour:
   playingManually: 0
   manualHits: 0
   manualBlows: 0
+  Ghits: 0
+  Gblows: 0
 --- !u!4 &1824369300
 Transform:
   m_ObjectHideFlags: 0

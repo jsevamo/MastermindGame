@@ -59,7 +59,7 @@ namespace MastermindGame.Scripts
         [SerializeField] public bool isAnswerVisible;
 
         [FormerlySerializedAs("numberToGuess")] [SerializeField] [Range(2.0f, 4.0f)]
-        private int numberOfRowsToGuess = 4;
+        public int numberOfRowsToGuess = 4;
 
         [SerializeField] private GameObject boardPiece =null;
         [SerializeField] private GameObject playPiece = null;
@@ -206,9 +206,9 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            // winList.Clear();
-            // winList.Add(2);
-            // winList.Add(3);
+            winList.Clear();
+            winList.Add(2);
+            winList.Add(3);
             // winList.Add(2);
             // winList.Add(5);
             

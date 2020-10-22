@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 namespace MastermindGame.Scripts
 {
@@ -9,9 +11,10 @@ namespace MastermindGame.Scripts
     
     public class AiSolver : MonoBehaviour
     {
-        
+
         private GameController GC;
         [SerializeField ]List<List<int>> S = new List<List<int>>();
+        [SerializeField ]List<List<int>> tempS = new List<List<int>>();
         private int numLeft;
         private int solI;
     
@@ -39,24 +42,70 @@ namespace MastermindGame.Scripts
 
         void CreateTheSetS()
         {
-            for (var a = 1; a < 7; a++)
-            for (var b = 1; b < 7; b++)
-            for (var c = 1; c < 7; c++)
-            for (var d = 1; d < 7; d++)
+            if (GC.GetNumberOfRowsToGuess() == 4)
             {
-                var list = new List<int>();
-                list.Clear();
-                list.Add(a);
-                list.Add(b);
-                list.Add(c);
-                list.Add(d);
-                S.Add(list);
+                for (var a = 1; a < 7; a++)
+                for (var b = 1; b < 7; b++)
+                for (var c = 1; c < 7; c++)
+                for (var d = 1; d < 7; d++)
+                {
+                    var list = new List<int>();
+                    list.Clear();
+                    list.Add(a);
+                    list.Add(b);
+                    list.Add(c);
+                    list.Add(d);
+                    S.Add(list);
+                }
             }
+
+            if (GC.GetNumberOfRowsToGuess() == 3)
+            {
+                for (var a = 1; a < 7; a++)
+                for (var b = 1; b < 7; b++)
+                for (var c = 1; c < 7; c++)
+                {
+                    var list = new List<int>();
+                    list.Clear();
+                    list.Add(a);
+                    list.Add(b);
+                    list.Add(c);
+                    S.Add(list);
+                }
+            }
+
+            if (GC.GetNumberOfRowsToGuess() == 2)
+            {
+                for (var a = 1; a < 7; a++)
+                for (var b = 1; b < 7; b++)
+                {
+                    var list = new List<int>();
+                    list.Clear();
+                    list.Add(a);
+                    list.Add(b);
+                    S.Add(list);
+                }
+            }
+            
         }
 
         void PrintListFromS(List<int> list)
         {
-            Debug.Log("[" + list[0] + "]" + "[" + list[1] + "]" + "[" + list[2] + "]" + "[" + list[3] + "]");
+            if (GC.GetNumberOfRowsToGuess() == 4)
+            {
+                Debug.Log("[" + list[0] + "]" + "[" + list[1] + "]" + "[" + list[2] + "]" + "[" + list[3] + "]");
+            }
+            
+            if (GC.GetNumberOfRowsToGuess() == 3)
+            {
+                Debug.Log("[" + list[0] + "]" + "[" + list[1] + "]" + "[" + list[2] + "]");
+            }
+            
+            if (GC.GetNumberOfRowsToGuess() == 2)
+            {
+                Debug.Log("[" + list[0] + "]" + "[" + list[1] + "]");
+            }
+            
         }
 
         void PrintHowManyGuessesLeft()
@@ -83,8 +132,25 @@ namespace MastermindGame.Scripts
 
         void PrintSuggestedMove(int a, int b, int c, int d)
         {
-            Debug.Log("Suggested Move: " + "[" + ParseNumberToColor(a) + "]"  + "[" + ParseNumberToColor(b) + "]" 
-                      + "[" + ParseNumberToColor(c) + "]" + "[" + ParseNumberToColor(d) + "]" );
+            if (GC.GetNumberOfRowsToGuess() == 4)
+            {
+                Debug.Log("Suggested Move: " + "[" + ParseNumberToColor(a) + "]"  + "[" + ParseNumberToColor(b) + "]" 
+                          + "[" + ParseNumberToColor(c) + "]" + "[" + ParseNumberToColor(d) + "]" );
+            }
+            
+            if (GC.GetNumberOfRowsToGuess() == 3)
+            {
+                Debug.Log("Suggested Move: " + "[" + ParseNumberToColor(a) + "]"  + "[" + ParseNumberToColor(b) + "]" 
+                          + "[" + ParseNumberToColor(c) + "]" );
+            }
+            
+            if (GC.GetNumberOfRowsToGuess() == 2)
+            {
+                Debug.Log("Suggested Move: " + "[" + ParseNumberToColor(a) + "]"  + "[" + ParseNumberToColor(b) + "]" 
+                           );
+            }
+            
+            
         }
 
         string ParseNumberToColor(int n)
@@ -115,23 +181,33 @@ namespace MastermindGame.Scripts
             
             for (int i = 0; i < S.Count; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < GC.numberOfRowsToGuess; j++)
                 {
                     if (toRemove[j] == S[i][j])
                     {
                         counter++;
-                        if (counter == 4)
+                        if (counter == GC.numberOfRowsToGuess)
                         {
                             //Debug.Log("ok I found what to delete at S:" + i);
-                            S.RemoveAt(i);
+                           
                             hasRemoved = true;
                             counter = 0;
+                            
+                        }
+
+                        if (hasRemoved)
+                        {
+                            List<int> a = new List<int>();
+                            a = S[i];
+                            tempS.Add(a);
+                            //S.RemoveAt(i);
                             return;
                         }
                         
+                        
                     }
 
-                    if (j == 3) counter = 0;
+                    if (j == GC.numberOfRowsToGuess - 1) counter = 0;
                 }
                
             }
@@ -151,12 +227,12 @@ namespace MastermindGame.Scripts
             
             for (int i = 0; i < S.Count; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < GC.GetNumberOfRowsToGuess(); j++)
                 {
                     if (toCheck[j] == S[i][j])
                     {
                         counter++;
-                        if (counter == 4)
+                        if (counter == GC.GetNumberOfRowsToGuess())
                         {
                             Debug.Log("ok I found the solution in S at :" + i);
                             solI = i;
@@ -168,7 +244,7 @@ namespace MastermindGame.Scripts
                         
                     }
 
-                    if (j == 3) counter = 0;
+                    if (j == GC.GetNumberOfRowsToGuess() - 1) counter = 0;
                 }
                
             }
@@ -206,17 +282,38 @@ namespace MastermindGame.Scripts
                 
                 Debug.Log("------- Starting suggestion for Turn  " + (GC.columnBeingPlayedOn+1) + " -------");
                 
-                Debug.Log("After having performed some magic, I currently see " + numLeft + 
+                Debug.Log("After having performed some magic, I currently see " + S.Count + 
                           " possible combinations that could win the game in this turn.");
                 
-                Debug.Log("That means that I have a certainty of " + Math.Round(((1f / numLeft) * 100f), 2) 
+                Debug.Log("That means that I have a certainty of " + Math.Round(((1f / S.Count) * 100f), 2) 
                                                                    + "% that you will win now with the following " +
                                                                    "suggested move: " );
                 
+                //Deleteeeee this
                 CheckIfSolutionStillInS(GC.winList);
                 PrintListFromS(S[solI]);
-                
-                PrintSuggestedMove(S[0][0], S[0][1],S[0][2],S[0][3]);
+
+
+                int index = Random.Range(0, S.Count);
+
+
+                if (GC.GetNumberOfRowsToGuess() == 4)
+                {
+                    PrintSuggestedMove(S[index][0], S[index][1],S[index][2],S[index][3]);
+                }
+                if (GC.GetNumberOfRowsToGuess() == 3)
+                {
+                    PrintSuggestedMove(S[index][0], S[index][1],S[index][2], 1);
+                }
+                if (GC.GetNumberOfRowsToGuess() == 2)
+                {
+                    PrintSuggestedMove(S[index][0], S[index][1],1,1);
+                }
+
+                // for (int i = 0; i < S.Count; i++)
+                // {
+                //     PrintListFromS(S[i]);
+                // }
                 
                 
                 Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
@@ -227,10 +324,9 @@ namespace MastermindGame.Scripts
         {
 
             // List<int> a = new List<int>();
-            // a.Add(2);
-            // a.Add(3);
-            // a.Add(2);
-            // a.Add(5);
+            // a.Add(1);
+            // a.Add(4);
+            //
             //
             // CompareHitsAndBlows(_currentGuess, a, _hits, _blows);
 
@@ -238,6 +334,8 @@ namespace MastermindGame.Scripts
             {
                 CompareHitsAndBlows(_currentGuess, S[i], _hits, _blows);
             }
+            
+            ReplaceTempList();
 
         }
 
@@ -317,8 +415,26 @@ namespace MastermindGame.Scripts
             {
                 //Debug.Log("We have removed some thingies");
                 RemoveSolutionFromListS(winList);
+                //ReplaceTempList();
             }
             
+        }
+
+        void ReplaceTempList()
+        {
+            Debug.Log(tempS.Count);
+            
+            //S.Clear();
+
+            for (int i = 0; i < tempS.Count; i++)
+            {
+                if (S.Contains(tempS[i]))
+                {
+                    S.Remove(tempS[i]);
+                }
+            }
+            
+            tempS.Clear();
         }
 
         public void ActivateAiforTurn()

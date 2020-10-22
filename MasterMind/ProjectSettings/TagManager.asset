@@ -13,6 +13,7 @@ TagManager:
   - Hit&Blow
   - Slot
   - Blocker
+  - AI
   layers:
   - Default
   - TransparentFX
