@@ -8,9 +8,11 @@ namespace MastermindGame.Scripts
         // Start is called before the first frame update
     
         private GameController GC;
+        private AiSolver AI;
         void Start()
         {
             GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+            AI = GameObject.FindWithTag("AI").GetComponent<AiSolver>();
         }
 
         // Update is called once per frame
@@ -18,6 +20,7 @@ namespace MastermindGame.Scripts
         {
             GC.SaveOrderOfPlayPieces();
             GC.MoveToNextColumn();
+            AI.ActivateAiforTurn();
         }
     }
 }

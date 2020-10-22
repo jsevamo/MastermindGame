@@ -17,17 +17,18 @@ namespace MastermindGame.Scripts
             GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
             
             CreateTheSetS();
-            PrintHowManyGuessesLeft();
-            SuggestACombination();
+            ActivateAiforTurn();
             
             
-            List<int> a = new List<int>();
-            a.Add(6);
-            a.Add(5);
-            a.Add(4);
-            a.Add(3);
+            // Testing for removing solution from S
             
-            RemoveSolutionFromListS(a);
+            // List<int> a = new List<int>();
+            // a.Add(6);
+            // a.Add(5);
+            // a.Add(4);
+            // a.Add(3);
+            //
+            // RemoveSolutionFromListS(a);
             
         }
     
@@ -56,11 +57,14 @@ namespace MastermindGame.Scripts
 
         void PrintHowManyGuessesLeft()
         {
+            Debug.Log("------- Starting suggestion for Turn  " + (GC.columnBeingPlayedOn+1) + " -------");
+            
             Debug.Log("After having performed some magic, I currently see " + ReturnGuessesLeft() + 
-                      " possible combinations that could win this game in this turn.");
+                      " possible combinations that could win the game in this turn.");
             
             Debug.Log("That means that I have a certainty of " + Math.Round(((1f / ReturnGuessesLeft()) * 100f), 2) 
-                                                            + "% that you will win now with what I suggest." );
+                                                            + "% that you will win now with the following " +
+                                                            "suggested move: " );
         }
 
         int ReturnGuessesLeft()
@@ -134,6 +138,17 @@ namespace MastermindGame.Scripts
                 PrintSuggestedMove(1, 1, 2, 2);
                 Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
             }
+            else
+            {
+                Debug.Log("The Ai is now at column: " + GC.columnBeingPlayedOn+1);
+                Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
+            }
+        }
+
+        public void ActivateAiforTurn()
+        {
+            PrintHowManyGuessesLeft();
+            SuggestACombination();
         }
     }
 }
