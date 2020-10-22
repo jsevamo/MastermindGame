@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MastermindGame.Scripts
@@ -18,9 +19,27 @@ namespace MastermindGame.Scripts
         // Update is called once per frame
         private void OnMouseDown()
         {
-            GC.SaveOrderOfPlayPieces();
-            GC.MoveToNextColumn();
-            AI.ActivateAiforTurn();
+            if (GC.columnBeingPlayedOn == 0)
+            {
+                int hits;
+                int blows;
+
+                hits = GC.Ghits;
+                blows = GC.Gblows;
+                List<int> currentGuess = GC.currentGuess;
+                
+                GC.SaveOrderOfPlayPieces();
+                GC.MoveToNextColumn();
+                AI.CompareWithEverythingInS(currentGuess, hits, blows);
+                AI.ActivateAiforTurn();
+            }
+            else
+            {
+                GC.SaveOrderOfPlayPieces();
+                GC.MoveToNextColumn();
+                AI.ActivateAiforTurn();
+            }
+            
         }
     }
 }

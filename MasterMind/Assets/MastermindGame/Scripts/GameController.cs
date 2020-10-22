@@ -79,7 +79,7 @@ namespace MastermindGame.Scripts
         [FormerlySerializedAs("playPieces")] [SerializeField]
         private System.Collections.Generic.List<GameObject> playPiecesPutOnBoard;
 
-        [SerializeField]private System.Collections.Generic.List<int> currentGuess;
+        [SerializeField] public System.Collections.Generic.List<int> currentGuess;
         [SerializeField] private System.Collections.Generic.List<int> Col1 = null;
         [SerializeField] private System.Collections.Generic.List<int> Col2 = null;
         [SerializeField] private System.Collections.Generic.List<int> Col3 = null;
@@ -206,11 +206,11 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            // winList.Clear();
-            // winList.Add(1);
-            // winList.Add(1);
-            // winList.Add(1);
-            // winList.Add(1);
+            winList.Clear();
+            winList.Add(6);
+            winList.Add(6);
+            winList.Add(6);
+            winList.Add(6);
             
             DrawWinningArrangement();
         }

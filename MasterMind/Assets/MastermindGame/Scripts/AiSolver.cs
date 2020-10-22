@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MastermindGame.Scripts
@@ -124,6 +125,7 @@ namespace MastermindGame.Scripts
                 }
                
             }
+            
 
             if (!hasRemoved)
             {
@@ -145,19 +147,125 @@ namespace MastermindGame.Scripts
 
                 hits = GC.Ghits;
                 blows = GC.Gblows;
+
+                List<int> currentGuess = GC.currentGuess;
                 
-                Debug.Log("Hits: " + hits);
-                Debug.Log("Blows: " + blows);
+                CompareWithEverythingInS(currentGuess, hits, blows);
                 
                 
                 Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
             }
         }
 
+        public void CompareWithEverythingInS(List<int> _currentGuess, int _hits, int _blows)
+        {
+            List<int> a = new List<int>();
+            
+            a.Add(1);
+            a.Add(1);
+            a.Add(1);
+            a.Add(1);
+
+            CompareHitsAndBlows(_currentGuess,a, _hits, _blows);
+
+        }
+
+        void  CompareHitsAndBlows(List<int> currentGuess, List<int> winList, int hits, int blows)
+        {
+            currentGuess = GC.currentGuess;
+            
+            
+            int _hits = 0;
+            int _blows = 0;
+            
+            var usedSlots = new System.Collections.Generic.List<int>();
+            
+            
+
+            for (var i = 0; i < currentGuess.Count; i++)
+                if (currentGuess[i] == winList[i])
+                {
+                    _hits++;
+                    usedSlots.Add(i);
+                }
+            
+            var guessListAfterHits = new System.Collections.Generic.List<int>();
+            var winListAfterHits = new System.Collections.Generic.List<int>();
+
+            for (var i = 0; i < winList.Count; i++)
+                if (!usedSlots.Contains(i))
+                    winListAfterHits.Add(winList[i]);
+
+
+            for (var i = 0; i < currentGuess.Count; i++)
+                if (!usedSlots.Contains(i))
+                    guessListAfterHits.Add(currentGuess[i]);
+            
+            var flaggedN = new System.Collections.Generic.List<int>();
+            
+            foreach (var n in guessListAfterHits)
+                if (winListAfterHits.Contains(n))
+                {
+                    var countGuess = CountHowManyOfNumber(guessListAfterHits, n);
+                    var countWin = CountHowManyOfNumber(winListAfterHits, n);
+
+
+                    if (countGuess == countWin)
+                    {
+                        if (!flaggedN.Contains(n))
+                            for (var i = 0; i < countGuess; i++)
+                            {
+                                _blows++;
+                                flaggedN.Add(n);
+                            }
+                    }
+                    else
+                    {
+                        if (!flaggedN.Contains(n))
+                        {
+                            _blows++;
+                            flaggedN.Add(n);
+                        }
+                    }
+                }
+
+
+            flaggedN.Clear();
+            
+            
+
+            if (_hits == hits && _blows == blows)
+            {
+                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            }
+            else
+            {
+                Debug.Log("We have removed some thingies");
+                RemoveSolutionFromListS(winList);
+            }
+            
+        }
+
         public void ActivateAiforTurn()
         {
+            
             PrintHowManyGuessesLeft();
             SuggestACombination();
+            
+            
+        }
+        
+        int CountHowManyOfNumber(System.Collections.Generic.List<int> list, int n)
+        {
+            int count = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == n)
+                {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }
