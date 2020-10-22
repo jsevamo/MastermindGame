@@ -15,8 +15,7 @@ namespace MastermindGame.Scripts
             GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
             AI = GameObject.FindWithTag("AI").GetComponent<AiSolver>();
         }
-
-        // Update is called once per frame
+        
         private void OnMouseDown()
         {
             if (GC.columnBeingPlayedOn == 0)

@@ -90,7 +90,7 @@ namespace MastermindGame.Scripts
         [SerializeField] private System.Collections.Generic.List<int> Col8 = null;
         [SerializeField] private System.Collections.Generic.List<int>[] columnArray = new System.Collections.Generic.List<int>[8];
 
-        [SerializeField] private System.Collections.Generic.List<int> winList;
+        [SerializeField] public System.Collections.Generic.List<int> winList;
 
         [SerializeField] public int columnBeingPlayedOn;
 
@@ -206,11 +206,11 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            winList.Clear();
-            winList.Add(6);
-            winList.Add(6);
-            winList.Add(6);
-            winList.Add(6);
+            // winList.Clear();
+            // winList.Add(2);
+            // winList.Add(3);
+            // winList.Add(2);
+            // winList.Add(5);
             
             DrawWinningArrangement();
         }

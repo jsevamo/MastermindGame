@@ -12,10 +12,13 @@ namespace MastermindGame.Scripts
         
         private GameController GC;
         [SerializeField ]List<List<int>> S = new List<List<int>>();
+        private int numLeft;
+        private int solI;
     
         void Start()
         {
             GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+            numLeft = S.Count;
             
             CreateTheSetS();
             ActivateAiforTurn();
@@ -58,14 +61,19 @@ namespace MastermindGame.Scripts
 
         void PrintHowManyGuessesLeft()
         {
-            Debug.Log("------- Starting suggestion for Turn  " + (GC.columnBeingPlayedOn+1) + " -------");
+            if (GC.columnBeingPlayedOn == 0)
+            {
+                numLeft = S.Count; 
+                Debug.Log("------- Starting suggestion for Turn  " + (GC.columnBeingPlayedOn+1) + " -------");
             
-            Debug.Log("After having performed some magic, I currently see " + ReturnGuessesLeft() + 
-                      " possible combinations that could win the game in this turn.");
+                Debug.Log("After having performed some magic, I currently see " + numLeft + 
+                          " possible combinations that could win the game in this turn.");
             
-            Debug.Log("That means that I have a certainty of " + Math.Round(((1f / ReturnGuessesLeft()) * 100f), 2) 
-                                                            + "% that you will win now with the following " +
-                                                            "suggested move: " );
+                Debug.Log("That means that I have a certainty of " + Math.Round(((1f / numLeft) * 100f), 2) 
+                                                                   + "% that you will win now with the following " +
+                                                                   "suggested move: " );
+            }
+
         }
 
         int ReturnGuessesLeft()
@@ -100,6 +108,8 @@ namespace MastermindGame.Scripts
 
         void RemoveSolutionFromListS(List<int> toRemove)
         {
+            numLeft = S.Count;
+            
             int counter = 0;
             bool hasRemoved = false;
             
@@ -133,6 +143,43 @@ namespace MastermindGame.Scripts
             }
         }
 
+        void CheckIfSolutionStillInS(List<int> toCheck)
+        {
+
+            int counter = 0;
+            bool hasRemoved = false;
+            
+            for (int i = 0; i < S.Count; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (toCheck[j] == S[i][j])
+                    {
+                        counter++;
+                        if (counter == 4)
+                        {
+                            Debug.Log("ok I found the solution in S at :" + i);
+                            solI = i;
+                            //S.RemoveAt(i);
+                            hasRemoved = true;
+                            counter = 0;
+                            return;
+                        }
+                        
+                    }
+
+                    if (j == 3) counter = 0;
+                }
+               
+            }
+            
+
+            if (!hasRemoved)
+            {
+                throw new Exception("Shit the solution is no longer in S");
+            }
+        }
+
         void SuggestACombination()
         {
             if (GC.columnBeingPlayedOn == 0)
@@ -149,8 +196,27 @@ namespace MastermindGame.Scripts
                 blows = GC.Gblows;
 
                 List<int> currentGuess = GC.currentGuess;
+
+                if (GC.columnBeingPlayedOn > 1)
+                {
+                    CompareWithEverythingInS(currentGuess, hits, blows);
+                }
                 
-                CompareWithEverythingInS(currentGuess, hits, blows);
+                
+                
+                Debug.Log("------- Starting suggestion for Turn  " + (GC.columnBeingPlayedOn+1) + " -------");
+                
+                Debug.Log("After having performed some magic, I currently see " + numLeft + 
+                          " possible combinations that could win the game in this turn.");
+                
+                Debug.Log("That means that I have a certainty of " + Math.Round(((1f / numLeft) * 100f), 2) 
+                                                                   + "% that you will win now with the following " +
+                                                                   "suggested move: " );
+                
+                CheckIfSolutionStillInS(GC.winList);
+                PrintListFromS(S[solI]);
+                
+                PrintSuggestedMove(S[0][0], S[0][1],S[0][2],S[0][3]);
                 
                 
                 Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
@@ -159,20 +225,28 @@ namespace MastermindGame.Scripts
 
         public void CompareWithEverythingInS(List<int> _currentGuess, int _hits, int _blows)
         {
-            List<int> a = new List<int>();
-            
-            a.Add(1);
-            a.Add(1);
-            a.Add(1);
-            a.Add(1);
 
-            CompareHitsAndBlows(_currentGuess,a, _hits, _blows);
+            // List<int> a = new List<int>();
+            // a.Add(2);
+            // a.Add(3);
+            // a.Add(2);
+            // a.Add(5);
+            //
+            // CompareHitsAndBlows(_currentGuess, a, _hits, _blows);
+
+            for (int i = 0; i < S.Count; i++)
+            {
+                CompareHitsAndBlows(_currentGuess, S[i], _hits, _blows);
+            }
 
         }
 
         void  CompareHitsAndBlows(List<int> currentGuess, List<int> winList, int hits, int blows)
         {
             currentGuess = GC.currentGuess;
+            hits = GC.Ghits;
+            blows = GC.Gblows;
+            
             
             
             int _hits = 0;
@@ -236,11 +310,12 @@ namespace MastermindGame.Scripts
 
             if (_hits == hits && _blows == blows)
             {
-                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                //Debug.Log("ITs the same, cant delete");
+                return;
             }
             else
             {
-                Debug.Log("We have removed some thingies");
+                //Debug.Log("We have removed some thingies");
                 RemoveSolutionFromListS(winList);
             }
             
