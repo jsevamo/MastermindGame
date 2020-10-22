@@ -105,6 +105,9 @@ namespace MastermindGame.Scripts
         [SerializeField] public int manualHits = 0;
         [SerializeField] public int manualBlows = 0;
 
+        [SerializeField] public int Ghits = 0;
+        [SerializeField] public int Gblows = 0;
+
         public int GetNumberOfRowsToGuess()
         {
             return numberOfRowsToGuess;
@@ -203,11 +206,11 @@ namespace MastermindGame.Scripts
             
             
             //Override Win List for tests
-            //winList.Clear();
-            //winList.Add(2);
-            //winList.Add(1);
-            //winList.Add(5);
-            //winList.Add(2);
+            // winList.Clear();
+            // winList.Add(1);
+            // winList.Add(1);
+            // winList.Add(1);
+            // winList.Add(1);
             
             DrawWinningArrangement();
         }
@@ -350,17 +353,26 @@ namespace MastermindGame.Scripts
 
             flaggedN.Clear();
 
+            Ghits = hits;
+            Gblows = blows;
+
 
             currentPlay.AddHitsAndBlows(hits, blows);
+            
             if (hits == numberOfRowsToGuess) gameOver = true;
             
             }
             else
             {
+                Ghits = 0;
+                Gblows = 0;
                 currentPlay.AddHitsAndBlows(manualHits, manualBlows);
+                Ghits = manualHits;
+                Gblows = manualBlows;
                 if (manualHits == numberOfRowsToGuess) gameOver = true;
                 manualBlows = 0;
                 manualHits = 0;
+                
             }
             
         }

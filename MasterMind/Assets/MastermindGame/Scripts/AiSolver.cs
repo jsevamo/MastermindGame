@@ -140,7 +140,16 @@ namespace MastermindGame.Scripts
             }
             else
             {
-                Debug.Log("The Ai is now at column: " + GC.columnBeingPlayedOn+1);
+                int hits;
+                int blows;
+
+                hits = GC.Ghits;
+                blows = GC.Gblows;
+                
+                Debug.Log("Hits: " + hits);
+                Debug.Log("Blows: " + blows);
+                
+                
                 Debug.Log("------- End Of Suggestion for Turn " + (GC.columnBeingPlayedOn+1) + " -------");
             }
         }
